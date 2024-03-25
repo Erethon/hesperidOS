@@ -1,0 +1,3 @@
+* Hesperides OS
+My NixOS configuration files. The name of the repo is a "pun" for Nix -> Nyx
+-> Hesperides -> HesperidOS.
