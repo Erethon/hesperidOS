@@ -3,6 +3,7 @@
     curl
     dig
     dmidecode
+    file
     git
     hdparm
     htop
@@ -12,6 +13,7 @@
     molly-guard
     pstree
     tmux
+    tree
     vim
     wget
     zsh
@@ -22,4 +24,12 @@
     extraGroups = [ "wheel" ];
   };
   users.defaultUserShell = pkgs.zsh;
+
+  security.sudo.wheelNeedsPassword = false;
+
+  programs.zsh.enable = true;
+
+  networking.firewall.enable = true;
+
+  services.openssh.enable = true;
 }
