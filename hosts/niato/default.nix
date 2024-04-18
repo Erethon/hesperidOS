@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   termsad = pkgs.terminus_font.overrideAttrs (finalAttrs: previousAttrs: {
-    patches = [ "alt/td1.diff" "alt/dv1.diff" ];
+    patches = [ "alt/td1.diff" "alt/dv1.diff" "alt/ij1.diff" ];
   });
 in {
   imports = [ # Include the results of the hardware scan.

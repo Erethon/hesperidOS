@@ -1,3 +1,12 @@
 * Hesperides OS
 My NixOS configuration files. The name of the repo is a "pun" for Nix -> Nyx
 -> Hesperides -> HesperidOS.
+
+I'm still very new to NixOS, so I might be doing things in a very
+wrong/non-optimal way that happens to work by luck, any feedback is highly
+appreciated.
+
+** How to deploy
+#+begin_src sh
+  sudo nixos-rebuild switch --flake <path_to_repo>/hesperidOS/#niato
+#+end_src

@@ -1,5 +1,7 @@
 { pkgs, config, ... }: {
   environment.systemPackages = with pkgs; [
+    bc
+    btop
     curl
     dig
     dmidecode
@@ -7,10 +9,12 @@
     git
     hdparm
     htop
+    iotop
     killall
     lshw
     lsof
     molly-guard
+    nmon
     pstree
     tmux
     tree
