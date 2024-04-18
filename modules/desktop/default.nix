@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  custom_terminus = pkgs.terminus_font.overrideAttrs
+    (finalAttrs: previousAttrs: {
+      patches = [ "alt/td1.diff" "alt/dv1.diff" "alt/ij1.diff" ];
+    });
+in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   services.xserver = {
@@ -11,6 +17,7 @@
     windowManager.dwm.package =
       pkgs.dwm.override { conf = ../../patches/dwm-config.h; };
   };
+  fonts.packages = [ custom_terminus ];
 
   services.opensnitch.enable = true;
   environment.systemPackages = with pkgs; [ opensnitch-ui ];

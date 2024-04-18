@@ -1,9 +1,4 @@
-{ config, lib, pkgs, ... }:
-let
-  termsad = pkgs.terminus_font.overrideAttrs (finalAttrs: previousAttrs: {
-    patches = [ "alt/td1.diff" "alt/dv1.diff" "alt/ij1.diff" ];
-  });
-in {
+{ config, lib, pkgs, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -31,9 +26,6 @@ in {
     scrot
     #    (pkgs.firefox.override {cfg.speechSynthesisSupport = false;})
   ];
-
-  #  fonts.packages = with pkgs; [ terminus_font ];
-  fonts.packages = [ termsad ];
 
   boot.initrd.luks.devices = {
     crypted = {
