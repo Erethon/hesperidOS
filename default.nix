@@ -5,7 +5,9 @@
     curl
     dig
     dmidecode
+    fd
     file
+    fzf
     git
     hdparm
     htop
@@ -14,6 +16,7 @@
     lshw
     lsof
     molly-guard
+    ncdu
     nmon
     pstree
     tmux
@@ -26,6 +29,7 @@
   users.users.dgrig = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    initialPassword = "vmonlypass";
   };
   users.defaultUserShell = pkgs.zsh;
 
