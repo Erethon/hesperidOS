@@ -20,5 +20,12 @@
         impermanence.nixosModules.impermanence
       ];
     };
+    nixosConfigurations.nixosrnd = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./default.nix
+        ./hosts/nixosrnd/default.nix
+      ];
+    };
   };
 }
