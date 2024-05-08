@@ -43,5 +43,13 @@
 
   networking.firewall.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 222 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
+  };
 }
