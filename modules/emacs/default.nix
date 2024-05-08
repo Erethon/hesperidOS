@@ -6,8 +6,11 @@
         epkgs.evil-collection
         epkgs.evil-leader
         epkgs.monokai-theme
+        epkgs.nix-mode
         epkgs.org-journal
         epkgs.projectile
       ]))
     ];
+
+  services.emacs = { enable = true; };
 }
