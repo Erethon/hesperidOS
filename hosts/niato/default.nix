@@ -38,7 +38,7 @@
 
   environment.persistence."/persistent" = {
     users.dgrig = {
-      directories = [ "Code" "Documents" "Vault" "Downloads" ];
+      directories = [ "Code" "Documents" "Vault" "Downloads" "mail" ".mutt" ".msmtp"];
       files = [
         ".tmux.conf"
         ".zshrc"
@@ -48,6 +48,9 @@
         ".aliases"
         ".Xdefaults"
         ".xprofile"
+        ".muttrc"
+        ".msmtprc"
+        ".vimrc"
       ];
     };
   };
