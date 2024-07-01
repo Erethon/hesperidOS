@@ -10,6 +10,7 @@
     efiSupport = false;
     enableCryptodisk = true;
   };
+  boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
 
   networking.hostName = "niato"; # Define your hostname.
   time.timeZone = "Europe/Athens";
