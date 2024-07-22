@@ -5,6 +5,7 @@
     curl
     dig
     dmidecode
+    dstat
     fd
     file
     fzf
@@ -43,13 +44,16 @@
 
   networking.firewall.enable = true;
 
-  services.openssh = {
-    enable = true;
-    ports = [ 222 ];
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
+  services = {
+    openssh = {
+      enable = true;
+      ports = [ 222 ];
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
     };
+    locate = { enable = true; };
   };
 }

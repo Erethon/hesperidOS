@@ -12,7 +12,7 @@ in {
     xkb.layout = "us,gr,ru";
     xkb.variant = ",,phonetic";
     xkb.options = "grp:alt_shift_toggle,ctrl:nocaps";
-    libinput.enable = true;
+    #libinput.enable = true;
     windowManager.dwm.enable = true;
     windowManager.dwm.package =
       pkgs.dwm.override { conf = ../../patches/dwm-config.h; };
@@ -20,7 +20,7 @@ in {
   fonts.packages = [ custom_terminus ];
 
   services.opensnitch.enable = true;
-  environment.systemPackages = with pkgs; [ opensnitch-ui neomutt isync msmtp];
+  environment.systemPackages = with pkgs; [ opensnitch-ui neomutt isync msmtp ];
   programs.ssh.startAgent = true;
   users.users.dgrig.extraGroups = [ "wheel" "video" ];
   services.udev.extraRules = ''

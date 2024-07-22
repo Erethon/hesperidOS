@@ -39,7 +39,18 @@
 
   environment.persistence."/persistent" = {
     users.dgrig = {
-      directories = [ "Code" "Documents" "Vault" "Downloads" "mail" ".mutt" ".msmtp"];
+      directories = [
+        "Code"
+        "Documents"
+        "Vault"
+        "Downloads"
+        "mail"
+        ".mutt"
+        ".msmtp"
+        ".mozilla"
+        ".emacs.d"
+        ".ollama"
+      ];
       files = [
         ".tmux.conf"
         ".zshrc"
