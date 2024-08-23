@@ -7,7 +7,8 @@
         epkgs.evil-leader
         epkgs.monokai-theme
         epkgs.nix-mode
-        epkgs.org-journal
+        epkgs.org-roam
+        epkgs.org-contacts
         epkgs.projectile
       ]))
     ];
