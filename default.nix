@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ lib, pkgs, config, ... }: {
   environment.systemPackages = with pkgs; [
     bc
     btop
@@ -24,12 +24,13 @@
     tree
     vim
     wget
+    whois
     zsh
   ];
 
   users.users.dgrig = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "plugdev" ];
     initialPassword = "vmonlypass";
     openssh.authorizedKeys.keys = [
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIPb9z1U7Sti2lls0mlcmyPwmwD91amKwVlLZHYclSoULAAAABHNzaDo="
@@ -51,7 +52,7 @@
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
-        PermitRootLogin = "no";
+        PermitRootLogin = lib.mkDefault "no";
       };
     };
     locate = { enable = true; };
