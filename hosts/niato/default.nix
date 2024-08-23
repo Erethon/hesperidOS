@@ -10,7 +10,6 @@
     efiSupport = false;
     enableCryptodisk = true;
   };
-  boot.blacklistedKernelModules = [ "dvb_usb_rtl28xxu" ];
 
   networking.hostName = "niato"; # Define your hostname.
   time.timeZone = "Europe/Athens";
@@ -18,13 +17,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
     wpa_supplicant
-    dmenu
     acpi
-    rxvt-unicode
     wirelesstools
     acpilight
-    dunst
-    scrot
     #    (pkgs.firefox.override {cfg.speechSynthesisSupport = false;})
   ];
 
@@ -34,6 +29,7 @@
       preLVM = true;
     };
   };
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.openssh.enable = lib.mkForce false;
 
@@ -45,6 +41,7 @@
         "Vault"
         "Downloads"
         "mail"
+        ".mbsync"
         ".mutt"
         ".msmtp"
         ".mozilla"
@@ -60,6 +57,7 @@
         ".aliases"
         ".Xdefaults"
         ".xprofile"
+        ".mbsyncrc"
         ".muttrc"
         ".msmtprc"
         ".vimrc"
