@@ -20,7 +20,28 @@ in {
   fonts.packages = [ custom_terminus ];
 
   services.opensnitch.enable = true;
-  environment.systemPackages = with pkgs; [ opensnitch-ui neomutt isync msmtp ];
+  environment.systemPackages = with pkgs; [
+    age
+    opensnitch-ui
+    neomutt
+    isync
+    msmtp
+    dmenu
+    rxvt-unicode
+    dunst
+    keepassxc
+    scrot
+    feh
+    borgbackup
+    git-annex
+    rclone
+    pavucontrol
+    mpv
+    lm_sensors
+    rtorrent
+    slock
+    whois
+  ];
   programs.ssh.startAgent = true;
   users.users.dgrig.extraGroups = [ "wheel" "video" ];
   services.udev.extraRules = ''
