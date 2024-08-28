@@ -9,7 +9,9 @@
         epkgs.nix-mode
         epkgs.org-roam
         epkgs.org-contacts
+        epkgs.ox-reveal
         epkgs.projectile
+        epkgs.rust-mode
       ]))
     ];
 
