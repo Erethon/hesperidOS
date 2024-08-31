@@ -20,6 +20,7 @@
     acpi
     wirelesstools
     acpilight
+    tailscale
     #    (pkgs.firefox.override {cfg.speechSynthesisSupport = false;})
   ];
 
@@ -32,6 +33,7 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.openssh.enable = lib.mkForce false;
+  services.tailscale = { enable = true; };
 
   environment.persistence."/persistent" = {
     users.dgrig = {
@@ -41,6 +43,7 @@
         "Vault"
         "Downloads"
         "mail"
+        ".ssh"
         ".mbsync"
         ".mutt"
         ".msmtp"
