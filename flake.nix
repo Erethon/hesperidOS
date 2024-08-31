@@ -46,5 +46,9 @@
         { sdImage.compressImage = false; }
       ];
     };
+    nixosConfigurations.nixosvpn = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ./default.nix ./hosts/nixosvpn/default.nix ];
+    };
   };
 }
