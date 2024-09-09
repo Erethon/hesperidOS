@@ -7,9 +7,9 @@
         epkgs.evil-leader
         epkgs.monokai-theme
         epkgs.nix-mode
+        epkgs.org-re-reveal
         epkgs.org-roam
         epkgs.org-contacts
-        epkgs.ox-reveal
         epkgs.projectile
         epkgs.rust-mode
       ]))
