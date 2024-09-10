@@ -45,6 +45,8 @@
 
   networking.firewall.enable = true;
 
+  nix.package = pkgs.lix;
+
   services = {
     openssh = {
       enable = true;
