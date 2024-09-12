@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-    ./syncthing.nix
-  ];
+  imports = [ ./hardware-configuration.nix ./syncthing.nix ];
 
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {

@@ -18,7 +18,8 @@
       };
       devices = {
         "oricono" = {
-          id = "3EYASN4-YCDRTVX-4LT42CF-KZZEJVU-OMLUG3V-YH3YAO7-GE4MBBN-LIXZFQO";
+          id =
+            "3EYASN4-YCDRTVX-4LT42CF-KZZEJVU-OMLUG3V-YH3YAO7-GE4MBBN-LIXZFQO";
           addresses = [ "tcp://100.64.0.2:22000" ];
         };
       };
