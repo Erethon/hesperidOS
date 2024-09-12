@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
     ./hardware-configuration.nix
+    ./syncthing.nix
   ];
 
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,7 +22,6 @@
     wirelesstools
     acpilight
     tailscale
-    #    (pkgs.firefox.override {cfg.speechSynthesisSupport = false;})
   ];
 
   boot.initrd.luks.devices = {
@@ -75,6 +75,9 @@
     neededForBoot = true;
   };
 
+  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
   security.sudo.wheelNeedsPassword = lib.mkForce true;
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22000 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 22000 ];
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
 }
