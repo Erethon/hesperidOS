@@ -3,10 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    erethonpkgs.url = "github:erethon/nixpkgs/hs232";
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, impermanence, ... }@inputs: {
+  outputs = { self, nixpkgs, impermanence, erethonpkgs, ... }@inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
     nixosConfigurations.niato = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -48,7 +49,18 @@
     };
     nixosConfigurations.nixosvpn = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./default.nix ./hosts/nixosvpn/default.nix ];
+      modules = [
+        ./default.nix
+        ./hosts/nixosvpn/default.nix
+        "${erethonpkgs}/nixos/modules/services/networking/headscale.nix"
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              unstable = erethonpkgs.legacyPackages.${prev.system};
+            })
+          ];
+        }
+      ];
     };
   };
 }

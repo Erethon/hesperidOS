@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
+  disabledModules = [ "services/networking/headscale.nix" ];
   boot.loader.grub.enable = true;
   boot.kernelParams = [ "console=ttyS0" ];
   boot.loader.grub.device = "/dev/vda";
@@ -13,6 +14,8 @@
     enable = true;
     address = "192.168.135.10";
     settings.server_url = "https://hs.erethon.com";
+    settings.dns.base_domain = "ts.erethon";
+    #settings.acl_policy_path = ./acl.json;
     settings.derp.server = {
       enabled = true;
       stun_listen_addr = "0.0.0.0:3478";
@@ -21,6 +24,7 @@
       region_name = "Erethon HS Derp";
     };
     settings.derp.urls = [ ];
+    package = pkgs.unstable.headscale;
   };
 
   networking.firewall = {
