@@ -1,11 +1,15 @@
 { lib, pkgs, config, ... }: {
   environment.systemPackages = with pkgs; [
+    bat
     bc
     btop
     curl
+    difftastic
     dig
     dmidecode
     dstat
+    dust
+    dysk
     fd
     file
     fzf
@@ -20,6 +24,7 @@
     ncdu
     nmon
     pstree
+    procps
     tmux
     tree
     vim
