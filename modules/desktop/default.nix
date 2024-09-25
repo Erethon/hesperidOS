@@ -34,6 +34,7 @@ in {
     feh
     borgbackup
     git-annex
+    gimp
     rclone
     pavucontrol
     mpv

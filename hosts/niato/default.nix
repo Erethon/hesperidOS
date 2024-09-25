@@ -40,6 +40,7 @@
         "Vault"
         "Downloads"
         "mail"
+        "tmp"
         ".ssh"
         ".mbsync"
         ".mutt"
