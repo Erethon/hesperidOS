@@ -30,7 +30,10 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.openssh.enable = lib.mkForce false;
-  services.tailscale = { enable = true; };
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
 
   environment.persistence."/persistent" = {
     users.dgrig = {
@@ -73,9 +76,13 @@
     neededForBoot = true;
   };
 
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  hardware.opengl.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
   security.sudo.wheelNeedsPassword = lib.mkForce true;
-  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22000 ];
-  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 22000 ];
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
 }

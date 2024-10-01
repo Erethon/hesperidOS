@@ -47,4 +47,7 @@
       };
     };
   };
+  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22000 ];
+  networking.firewall.interfaces.tailscale0.allowedUDPPorts = [ 22000 ];
 }
