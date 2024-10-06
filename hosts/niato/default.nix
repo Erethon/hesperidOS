@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ./syncthing.nix ];
 
+  unbound.tsdomain = "ts.erethon";
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
     enable = true;
