@@ -24,7 +24,7 @@
     ncdu
     nmon
     pstree
-    procps
+    procs
     tmux
     tree
     vim
