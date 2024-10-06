@@ -19,7 +19,6 @@
     acpi
     wirelesstools
     acpilight
-    tailscale
   ];
 
   boot.initrd.luks.devices = {
@@ -34,6 +33,9 @@
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";
+  };
+  systemd.services.tailscaled = {
+    serviceConfig.Environment = [ "TS_DISABLE_TAILDROP=true" ];
   };
 
   environment.persistence."/persistent" = {
