@@ -12,6 +12,7 @@
         epkgs.org-contacts
         epkgs.projectile
         epkgs.rust-mode
+        epkgs.terraform-mode
       ]))
     ];
 
