@@ -30,13 +30,13 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.openssh.enable = lib.mkForce false;
+  disabledModules = [ "services/networking/tailscale.nix" ];
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";
+    disableTaildrop = true;
   };
-  systemd.services.tailscaled = {
-    serviceConfig.Environment = [ "TS_DISABLE_TAILDROP=true" ];
-  };
+  services.fstrim.enable = true;
 
   environment.persistence."/persistent" = {
     users.dgrig = {

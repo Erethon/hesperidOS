@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    erethonpkgs.url = "github:erethon/nixpkgs/hs232";
+    unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
     impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { self, nixpkgs, impermanence, erethonpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, impermanence, unstablenixpkgs, ... }@inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
     nixosConfigurations.niato = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -19,7 +19,15 @@
         ./modules/firefox/default.nix
         ./modules/sdr/default.nix
         ./modules/unbound/default.nix
+        "${unstablenixpkgs}/nixos/modules/services/networking/tailscale.nix"
         impermanence.nixosModules.impermanence
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              unstable = unstablenixpkgs.legacyPackages.${prev.system};
+            })
+          ];
+        }
       ];
     };
     nixosConfigurations.nixosrnd = nixpkgs.lib.nixosSystem {
@@ -42,7 +50,7 @@
       modules = [
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
         ./default.nix
-        ./hosts/rpi4-f/default.nix
+        ./hosts/rpi4rf/default.nix
         ./modules/sdr/default.nix
         { sdImage.compressImage = false; }
       ];
@@ -52,11 +60,11 @@
       modules = [
         ./default.nix
         ./hosts/nixosvpn/default.nix
-        "${erethonpkgs}/nixos/modules/services/networking/headscale.nix"
+        "${unstablenixpkgs}/nixos/modules/services/networking/headscale.nix"
         {
           nixpkgs.overlays = [
             (final: prev: {
-              unstable = erethonpkgs.legacyPackages.${prev.system};
+              unstable = unstablenixpkgs.legacyPackages.${prev.system};
             })
           ];
         }
