@@ -70,5 +70,10 @@
         }
       ];
     };
+    nixosConfigurations.hetzner-x86_64 = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ./default.nix ./hosts/hetzner/default.nix ];
+    };
+
   };
 }
