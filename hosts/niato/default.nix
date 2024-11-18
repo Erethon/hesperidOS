@@ -47,6 +47,8 @@
         "Downloads"
         "mail"
         "tmp"
+        ".config/io.datasette.llm"
+        ".config/gh"
         ".ssh"
         ".mbsync"
         ".mutt"
