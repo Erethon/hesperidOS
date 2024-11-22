@@ -10,7 +10,6 @@ in {
   networking.hostName = "nixosvpn";
   time.timeZone = "UTC";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.trusted-users = [ "root" "dgrig" ];
   services.headscale = {
     enable = true;

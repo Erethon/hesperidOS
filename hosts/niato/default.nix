@@ -13,7 +13,6 @@
   networking.hostName = "niato"; # Define your hostname.
   time.timeZone = "Europe/Athens";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
     wpa_supplicant
     acpi

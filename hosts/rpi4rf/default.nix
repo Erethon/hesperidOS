@@ -11,7 +11,5 @@
   networking.hostName = "rpi4rf";
   time.timeZone = "Europe/Athens";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   system.stateVersion = "24.05"; # DO NOT CHANGE ME
 }

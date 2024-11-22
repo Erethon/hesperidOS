@@ -1,0 +1,18 @@
+{
+  "groups": {
+    "group:root": [
+      "superuser",
+      "cixinufo"
+    ],
+    "group:eva": [
+      "eva"
+    ]
+  },
+  "acls": [
+    {
+      "action": "accept",
+      "src": [ "group:root" ],
+      "dst": ["*:*"]
+    }
+      ]
+    }

@@ -7,7 +7,5 @@
   networking.hostName = "nixosrnd";
   time.timeZone = "Europe/Athens";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
 }

@@ -51,6 +51,7 @@
   networking.firewall.enable = true;
 
   nix.package = pkgs.lix;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services = {
     openssh = {
