@@ -19,6 +19,7 @@
     acpi
     wirelesstools
     acpilight
+    netdiscover
   ];
 
   boot.initrd.luks.devices = {
@@ -38,42 +39,6 @@
   };
   services.fstrim.enable = true;
 
-  environment.persistence."/persistent" = {
-    users.dgrig = {
-      directories = [
-        "Code"
-        "Documents"
-        "Vault"
-        "Downloads"
-        "mail"
-        "tmp"
-        ".config/io.datasette.llm"
-        ".config/gh"
-        ".ssh"
-        ".mbsync"
-        ".mutt"
-        ".msmtp"
-        ".mozilla"
-        ".emacs.d"
-        ".ollama"
-      ];
-      files = [
-        ".tmux.conf"
-        ".zshrc"
-        ".gitconfig"
-        ".histfile"
-        ".config/ls_col"
-        ".aliases"
-        ".Xdefaults"
-        ".xprofile"
-        ".mbsyncrc"
-        ".muttrc"
-        ".msmtprc"
-        ".vimrc"
-      ];
-    };
-  };
-
   fileSystems."/home/dgrig" = {
     device = "none";
     fsType = "tmpfs";
@@ -87,7 +52,6 @@
     driSupport32Bit = true;
   };
 
-  hardware.opengl.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
   security.sudo.wheelNeedsPassword = lib.mkForce true;
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
 }

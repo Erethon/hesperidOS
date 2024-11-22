@@ -15,19 +15,13 @@
         ./default.nix
         ./hosts/niato/default.nix
         ./modules/desktop/default.nix
+        ./modules/persistence/default.nix
         ./modules/emacs/default.nix
         ./modules/firefox/default.nix
         ./modules/sdr/default.nix
         ./modules/unbound/default.nix
         "${unstablenixpkgs}/nixos/modules/services/networking/tailscale.nix"
         impermanence.nixosModules.impermanence
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              unstable = unstablenixpkgs.legacyPackages.${prev.system};
-            })
-          ];
-        }
       ];
     };
     nixosConfigurations.nixosrnd = nixpkgs.lib.nixosSystem {
