@@ -15,22 +15,6 @@
         "type": "github"
       }
     },
-    "llmnixpkgs": {
-      "locked": {
-        "lastModified": 1731683710,
-        "narHash": "sha256-k0rjLlzlWqIMN6pv2bUpgyQNefSD2vWNq9Xhz3de9Co=",
-        "owner": "erethon",
-        "repo": "nixpkgs",
-        "rev": "b4d3b81623723dca9dfb82c705098eb5508ea8b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "erethon",
-        "ref": "llm-claude-3",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1731797254,
@@ -50,18 +34,17 @@
     "root": {
       "inputs": {
         "impermanence": "impermanence",
-        "llmnixpkgs": "llmnixpkgs",
         "nixpkgs": "nixpkgs",
         "unstablenixpkgs": "unstablenixpkgs"
       }
     },
     "unstablenixpkgs": {
       "locked": {
-        "lastModified": 1731971183,
-        "narHash": "sha256-5y/h/+Tx53pt73pbt4Fi039iB8JtO7vDnzLGbtgtJ0U=",
+        "lastModified": 1732277331,
+        "narHash": "sha256-a/D71P1/NxNA4d1z0GIR1w/OI9Cewjpxs80qXX9rLfI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "96b329f8050d026fa3490d21af1b5c58cf13b384",
+        "rev": "9ef587a977271584a98987f0037916b7b753fbd9",
         "type": "github"
       },
       "original": {
