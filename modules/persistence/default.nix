@@ -38,7 +38,10 @@
   fileSystems."/home/dgrig" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "size=4G" "mode=700" ];
+    options = [
+      "size=4G"
+      "mode=700"
+    ];
     neededForBoot = true;
   };
 }

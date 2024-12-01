@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.firefox = {
     enable = true;
     policies = {
@@ -24,13 +25,11 @@
         # Prevent installation of extensions manually
         "*".installation_mode = "blocked";
         "uBlock0@raymondhill.net" = {
-          install_url =
-            "https://addons.mozilla.org/firefox/downloads/file/4290466/ublock_origin-1.58.0.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4290466/ublock_origin-1.58.0.xpi";
           installation_mode = "force_installed";
         };
         "tridactyl.vim@cmcaine.co.uk" = {
-          install_url =
-            "https://addons.mozilla.org/firefox/downloads/file/4261352/tridactyl_vim-1.24.1.xpi";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4261352/tridactyl_vim-1.24.1.xpi";
           installation_mode = "force_installed";
         };
       };

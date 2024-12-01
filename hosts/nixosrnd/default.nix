@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [ ./hardware-configuration.nix ];
   boot.loader.grub.enable = true;
   boot.kernelParams = [ "console=ttyS0" ];

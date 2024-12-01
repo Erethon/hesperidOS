@@ -1,5 +1,14 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ./syncthing.nix ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ./syncthing.nix
+  ];
 
   unbound.tsdomain = "ts.erethon";
   boot.loader.efi.canTouchEfiVariables = true;
@@ -37,13 +46,6 @@
     disableTaildrop = true;
   };
   services.fstrim.enable = true;
-
-  fileSystems."/home/dgrig" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "size=4G" "mode=700" ];
-    neededForBoot = true;
-  };
 
   hardware.opengl = {
     enable = true;

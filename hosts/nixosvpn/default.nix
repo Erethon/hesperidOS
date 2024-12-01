@@ -1,6 +1,13 @@
-{ config, lib, pkgs, ... }:
-let hostip = "192.168.135.10";
-in {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  hostip = "192.168.135.10";
+in
+{
   imports = [ ./hardware-configuration.nix ];
   disabledModules = [ "services/networking/headscale.nix" ];
   boot.loader.grub.enable = true;
@@ -10,7 +17,10 @@ in {
   networking.hostName = "nixosvpn";
   time.timeZone = "UTC";
 
-  nix.settings.trusted-users = [ "root" "dgrig" ];
+  nix.settings.trusted-users = [
+    "root"
+    "dgrig"
+  ];
   services.headscale = {
     enable = true;
     address = hostip;
@@ -18,6 +28,7 @@ in {
     settings.metrics_listen_addr = "${hostip}:9099";
     settings.dns.base_domain = "ts.erethon";
     #settings.acl_policy_path = ./acl.json;
+    settings.prefixes.v4 = "198.18.1.0/24";
     settings.derp.server = {
       enabled = true;
       stun_listen_addr = "0.0.0.0:3478";
@@ -30,14 +41,19 @@ in {
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ 8080 9099 ];
+    allowedTCPPorts = [
+      8080
+      9099
+    ];
     allowedUDPPorts = [ 3478 ];
   };
   networking.interfaces.ens3 = {
-    ipv4.addresses = [{
-      address = hostip;
-      prefixLength = 24;
-    }];
+    ipv4.addresses = [
+      {
+        address = hostip;
+        prefixLength = 24;
+      }
+    ];
   };
   networking.defaultGateway = {
     address = "192.168.135.1";
