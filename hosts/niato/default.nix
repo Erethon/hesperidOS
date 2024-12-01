@@ -39,7 +39,6 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.openssh.enable = lib.mkForce false;
-  disabledModules = [ "services/networking/tailscale.nix" ];
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";

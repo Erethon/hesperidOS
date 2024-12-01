@@ -2,8 +2,7 @@
   description = "Erethon's (dgrig) NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     impermanence.url = "github:nix-community/impermanence";
   };
 
@@ -12,7 +11,6 @@
       self,
       nixpkgs,
       impermanence,
-      unstablenixpkgs,
       ...
     }@inputs:
     {
@@ -28,7 +26,6 @@
           ./modules/firefox/default.nix
           ./modules/sdr/default.nix
           ./modules/unbound/default.nix
-          "${unstablenixpkgs}/nixos/modules/services/networking/tailscale.nix"
           impermanence.nixosModules.impermanence
         ];
       };
@@ -65,10 +62,6 @@
         modules = [
           ./default.nix
           ./hosts/nixosvpn/default.nix
-          "${unstablenixpkgs}/nixos/modules/services/networking/headscale.nix"
-          {
-            nixpkgs.overlays = [ (final: prev: { unstable = unstablenixpkgs.legacyPackages.${prev.system}; }) ];
-          }
         ];
       };
       nixosConfigurations.connector = nixpkgs.lib.nixosSystem {

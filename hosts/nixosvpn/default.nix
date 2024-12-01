@@ -9,7 +9,6 @@ let
 in
 {
   imports = [ ./hardware-configuration.nix ];
-  disabledModules = [ "services/networking/headscale.nix" ];
   boot.loader.grub.enable = true;
   boot.kernelParams = [ "console=ttyS0" ];
   boot.loader.grub.device = "/dev/vda";
@@ -37,7 +36,6 @@ in
       region_name = "Erethon HS Derp";
     };
     settings.derp.urls = [ ];
-    package = pkgs.unstable.headscale;
   };
 
   networking.firewall = {
