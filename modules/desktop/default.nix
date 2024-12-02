@@ -11,8 +11,6 @@ let
   );
 in
 {
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
   services.xserver = {
     enable = true;
     xkb.layout = "us,gr,ru";
@@ -57,4 +55,10 @@ in
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="amdgpu_bl0", MODE="0666", RUN+="${pkgs.coreutils}/bin/chmod a+w /sys/class/backlight/%k/brightness"
   '';
+
+  services.pipewire.extraConfig.pipewire."00-disable-bell" = {
+    "context.properties" = {
+      "module.x11.bell" = "false";
+    };
+  };
 }
