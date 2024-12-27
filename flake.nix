@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     impermanence.url = "github:nix-community/impermanence";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
+    agenix.inputs.home-manager.follows = "";
   };
 
   outputs =
@@ -11,6 +15,7 @@
       self,
       nixpkgs,
       impermanence,
+      agenix,
       ...
     }@inputs:
     {
@@ -79,6 +84,15 @@
           ./hosts/hetzner/default.nix
         ];
       };
-
+      nixosConfigurations.warden = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./default.nix
+          ./modules/persistence/default.nix
+          ./hosts/warden/default.nix
+          impermanence.nixosModules.impermanence
+          agenix.nixosModules.default
+        ];
+      };
     };
 }
