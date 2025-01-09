@@ -17,8 +17,4 @@
       epkgs.terraform-mode
     ]))
   ];
-
-  services.emacs = {
-    enable = true;
-  };
 }
