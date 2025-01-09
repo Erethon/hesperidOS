@@ -21,7 +21,6 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       nixosConfigurations.niato = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./hosts/niato/default.nix
@@ -35,14 +34,12 @@
         ];
       };
       nixosConfigurations.nixosrnd = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./hosts/nixosrnd/default.nix
         ];
       };
       nixosConfigurations.livecd = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./default.nix
@@ -50,27 +47,28 @@
           ./modules/emacs/default.nix
           ./modules/firefox/default.nix
           ./modules/unbound/default.nix
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
         ];
       };
       nixosConfigurations.rpi4rf = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
         modules = [
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
           ./default.nix
           ./hosts/rpi4rf/default.nix
           ./modules/sdr/default.nix
-          { sdImage.compressImage = false; }
+          {
+            sdImage.compressImage = false;
+            nixpkgs.hostPlatform = "aarch64-linux";
+          }
         ];
       };
       nixosConfigurations.nixosvpn = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./hosts/nixosvpn/default.nix
         ];
       };
       nixosConfigurations.connector = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./hosts/connector/default.nix
@@ -78,14 +76,12 @@
         ];
       };
       nixosConfigurations.hetzner-x86_64 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./hosts/hetzner/default.nix
         ];
       };
       nixosConfigurations.warden = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         modules = [
           ./default.nix
           ./modules/persistence/default.nix
