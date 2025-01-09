@@ -78,5 +78,6 @@
     locate = {
       enable = true;
     };
+    speechd.enable = false;
   };
 }
