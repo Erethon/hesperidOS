@@ -26,6 +26,18 @@ in
     settings.server_url = "https://hs.erethon.com";
     settings.metrics_listen_addr = "${hostip}:9099";
     settings.dns.base_domain = "ts.erethon";
+    settings.dns.extra_records = [
+      {
+        name = "immich.ts.erethon";
+        type = "A";
+        value = "198.18.1.4";
+      }
+      {
+        name = "hoarder.ts.erethon";
+        type = "A";
+        value = "198.18.1.4";
+      }
+    ];
     #settings.acl_policy_path = ./acl.json;
     settings.prefixes.v4 = "198.18.1.0/24";
     settings.derp.server = {
