@@ -11,12 +11,21 @@
   ];
 
   unbound.tsdomain = "ts.erethon";
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = false;
-    enableCryptodisk = true;
+  boot = {
+    loader.efi.canTouchEfiVariables = true;
+    loader.grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = false;
+      enableCryptodisk = true;
+    };
+    initrd.luks.devices = {
+      crypted = {
+        device = "/dev/disk/by-uuid/43a773a4-718e-4e02-bf33-653fd7607ee7";
+        preLVM = true;
+      };
+    };
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   networking.hostName = "niato"; # Define your hostname.
@@ -30,22 +39,15 @@
     netdiscover
   ];
 
-  boot.initrd.luks.devices = {
-    crypted = {
-      device = "/dev/disk/by-uuid/43a773a4-718e-4e02-bf33-653fd7607ee7";
-      preLVM = true;
+  services = {
+    openssh.enable = lib.mkForce false;
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "client";
+      disableTaildrop = true;
     };
+    fstrim.enable = true;
   };
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  services.openssh.enable = lib.mkForce false;
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-    disableTaildrop = true;
-  };
-  services.fstrim.enable = true;
-
   security.sudo.wheelNeedsPassword = lib.mkForce true;
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
 }
