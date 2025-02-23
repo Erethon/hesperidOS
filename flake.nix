@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
+    mynixpkgs.url = "github:erethon/nixpkgs/init-ma-module";
     impermanence.url = "github:nix-community/impermanence";
     agenix = {
       url = "github:ryantm/agenix";
@@ -27,6 +27,18 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
       nixosConfigurations = {
+	orinoco = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./default.nix
+            ./hosts/orinoco/default.nix
+            ./modules/desktop/default.nix
+            ./modules/persistence/default.nix
+            ./modules/emacs/default.nix 
+            ./modules/firefox/default.nix
+            ./modules/unbound/default.nix
+            impermanence.nixosModules.impermanence
+          ];
+        };
         niato = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix

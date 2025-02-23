@@ -38,6 +38,22 @@
         "type": "github"
       }
     },
+    "mynixpkgs": {
+      "locked": {
+        "lastModified": 1739729198,
+        "narHash": "sha256-2NVNWMY31fjc7xdPF5cr7EwdLHSX35pgyFRSoCpb1oY=",
+        "owner": "erethon",
+        "repo": "nixpkgs",
+        "rev": "bb4a8b4698d7a6dce0e938b0d319ca5e29c2f3a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "erethon",
+        "ref": "init-ma-module",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1738163270,
@@ -58,6 +74,7 @@
       "inputs": {
         "agenix": "agenix",
         "impermanence": "impermanence",
+        "mynixpkgs": "mynixpkgs",
         "nixpkgs": "nixpkgs"
       }
     },
