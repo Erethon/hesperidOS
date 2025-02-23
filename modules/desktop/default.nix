@@ -50,6 +50,7 @@ in
     scrot
     feh
     borgbackup
+    newsboat
     git-annex
     gimp
     gh
@@ -60,6 +61,7 @@ in
     rtorrent
     slock
     whois
+    xclip
   ];
   programs.ssh.startAgent = true;
 }

@@ -17,6 +17,7 @@
         ".mozilla"
         ".emacs.d"
         ".ollama"
+        ".newsboat"
       ];
       files = [
         ".tmux.conf"
