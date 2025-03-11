@@ -60,6 +60,8 @@ in
     rtorrent
     slock
     whois
+    tmuxPlugins.fzf-tmux-url
+    xclip
   ];
   programs.ssh.startAgent = true;
 }
