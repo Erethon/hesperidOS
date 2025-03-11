@@ -1,9 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    ((emacsPackagesFor pkgs.emacs29-nox).emacsWithPackages (epkgs: [
-      epkgs.calfw
-      epkgs.calfw-org
+    ((emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (epkgs: [
       epkgs.evil
       epkgs.evil-collection
       epkgs.evil-leader
