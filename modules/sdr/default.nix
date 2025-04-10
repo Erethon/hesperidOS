@@ -5,5 +5,6 @@
     dsdcc
     proxmark3
     rtl_433
+    chirp
   ];
 }
