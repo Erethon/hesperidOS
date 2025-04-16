@@ -7,6 +7,8 @@
       epkgs.evil-leader
       epkgs.monokai-theme
       epkgs.nix-mode
+      epkgs.notmuch
+      epkgs.org-caldav
       epkgs.org-re-reveal
       epkgs.org-roam
       epkgs.org-contacts
