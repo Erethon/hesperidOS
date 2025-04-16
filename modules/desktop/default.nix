@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   custom_terminus = pkgs.terminus_font.overrideAttrs (
-    finalAttrs: previousAttrs: {
+    _: _: {
       patches = [
         "alt/td1.diff"
         "alt/dv1.diff"
@@ -40,7 +40,9 @@ in
 
   environment.systemPackages = with pkgs; [
     age
+    difftastic
     neomutt
+    notmuch
     isync
     msmtp
     dmenu
