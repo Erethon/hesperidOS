@@ -15,8 +15,10 @@
   };
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+  };
   boot.initrd.availableKernelModules = [
     "ahci"
     "xhci_pci"

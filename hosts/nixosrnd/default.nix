@@ -6,9 +6,13 @@
 }:
 {
   imports = [ ./hardware-configuration.nix ];
-  boot.loader.grub.enable = true;
-  boot.kernelParams = [ "console=ttyS0" ];
-  boot.loader.grub.device = "/dev/vda";
+  boot = {
+    loader.grub = {
+      enable = true;
+      device = "/dev/vda";
+    };
+    kernelParams = [ "console=ttyS0" ];
+  };
 
   networking.hostName = "nixosrnd";
   time.timeZone = "Europe/Athens";

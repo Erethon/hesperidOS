@@ -9,24 +9,30 @@
 {
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "ata_piix"
-    "uhci_hcd"
-    "virtio_pci"
-    "virtio_blk"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "ata_piix"
+        "uhci_hcd"
+        "virtio_pci"
+        "virtio_blk"
+      ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ ];
+    extraModulePackages = [ ];
   };
 
-  fileSystems."/boot" = {
-    device = "systemd-1";
-    fsType = "autofs";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
+      fsType = "ext4";
+    };
+
+    "/boot" = {
+      device = "systemd-1";
+      fsType = "autofs";
+    };
   };
 
   swapDevices = [ ];
