@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Redirect nixos.wiki to wiki.nixos.org",
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "wikiredirect@dgrig.com"
+    }
+  },
+  "permissions": ["webRequest", "webRequestBlocking", "*://nixos.wiki/*"],
+  "background": {
+    "scripts": ["redirect.js"],
+    "persistent": false
+  }
+}

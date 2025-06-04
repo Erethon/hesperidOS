@@ -1,4 +1,8 @@
 {
+  # This is signed by Mozilla so it can be used as is. The source for this xpi
+  # is redirect.js and redirect.manifest.json
+  environment.etc."firefox/extensions/redirect-extension.xpi".source = ./redirect.xpi;
+
   programs.firefox = {
     enable = true;
     policies = {
@@ -29,6 +33,10 @@
         };
         "tridactyl.vim@cmcaine.co.uk" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4261352/tridactyl_vim-1.24.1.xpi";
+          installation_mode = "force_installed";
+        };
+        "wikiredirect@dgrig.com" = {
+          install_url = "file:///etc/firefox/extensions/redirect-extension.xpi";
           installation_mode = "force_installed";
         };
       };
