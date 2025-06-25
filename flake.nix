@@ -2,8 +2,9 @@
   description = "Erethon's (dgrig) NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
+    #mynixpkgs.url = "github:NixOS/nixpkgs/master";
     impermanence.url = "github:nix-community/impermanence";
     agenix = {
       url = "github:ryantm/agenix";
@@ -21,7 +22,7 @@
       nixpkgs,
       impermanence,
       agenix,
-      mynixpkgs,
+      #mynixpkgs,
       ...
     }@inputs:
     {
@@ -34,10 +35,18 @@
       };
 
       nixosConfigurations = {
+        vm = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./default.nix
+            ./modules/common/default.nix
+            ./hosts/nixosrnd/default.nix
+          ];
+        };
         niato = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/niato/default.nix
+            ./modules/common/default.nix
             ./modules/desktop/default.nix
             ./modules/persistence/default.nix
             ./modules/emacs/default.nix
@@ -45,19 +54,6 @@
             ./modules/sdr/default.nix
             ./modules/unbound/default.nix
             impermanence.nixosModules.impermanence
-            #          "${mynixpkgs}/nixos/modules/services/web-apps/grist-core.nix" # Adjust path as needed
-            # Module override configuration
-            #          (
-            #            { config, pkgs, ... }:
-            #            {
-            #              nixpkgs.overlays = [
-            #                (final: prev: {
-            #                  grist-core = mynixpkgs.legacyPackages.x86_64-linux.grist-core;
-            #                })
-            #              ];
-            #            }
-            #          )
-
           ];
         };
         nixosrnd = nixpkgs.lib.nixosSystem {
@@ -93,18 +89,6 @@
           modules = [
             ./default.nix
             ./hosts/nixosvpn/default.nix
-            "${mynixpkgs}/nixos/modules/services/matrix/matrix-alertmanager.nix" # Adjust path as needed
-            # Module override configuration
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = [
-                  (final: prev: {
-                    matrix-alertmanager = mynixpkgs.legacyPackages.x86_64-linux.matrix-alertmanager;
-                  })
-                ];
-              }
-            )
           ];
         };
         connector = nixpkgs.lib.nixosSystem {
