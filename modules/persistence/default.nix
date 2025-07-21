@@ -17,8 +17,10 @@
         ".mozilla"
         ".emacs.d"
         ".ollama"
+        ".local/share/eva"
       ];
       files = [
+        ".aider.conf.yml"
         ".tmux.conf"
         ".zshrc"
         ".gitconfig"
@@ -30,6 +32,7 @@
         ".mbsyncrc"
         ".muttrc"
         ".msmtprc"
+        ".notmuch-config"
         ".vimrc"
       ];
     };

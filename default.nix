@@ -1,35 +1,30 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }:
 {
   environment.systemPackages = with pkgs; [
     bat
-    bc
     btop
     curl
-    difftastic
     dig
-    dmidecode
-    dstat
+    dool
     dust
     dysk
+    eva
     fd
     file
     fzf
     git
-    hdparm
     htop
     iotop
     killall
-    lshw
     lsof
     molly-guard
     ncdu
     nmon
-    pstree
+    psmisc
     procs
     tmux
     tree
@@ -59,12 +54,14 @@
 
   networking.firewall.enable = true;
 
-  nix.package = pkgs.lix;
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
+  nix = {
+    package = pkgs.lix;
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    optimise.automatic = true;
+  };
   services = {
     openssh = {
       enable = true;
@@ -75,9 +72,26 @@
         PermitRootLogin = lib.mkDefault "no";
       };
     };
-    locate = {
-      enable = true;
-    };
+    locate.enable = true;
     speechd.enable = false;
   };
+  security.pki.certificates = [
+    ''
+          ts.erethon
+          ==========
+      -----BEGIN CERTIFICATE-----
+      MIIB8zCCAZmgAwIBAgIQeLwQZpngGi1bCAB1SCgWUDAKBggqhkjOPQQDAjA2MRUw
+      EwYDVQQKEwxFcmV0aG9uIEFDTUUxHTAbBgNVBAMTFEVyZXRob24gQUNNRSBSb290
+      IENBMB4XDTI1MDExNjE3MTMxOFoXDTI2MDExNjE3MTMxM1owKTEnMCUGA1UEAxMe
+      RXJldGhvbiBJbnRlcm1lZGlhdGUgQ0EgMSB5ZWFyMFkwEwYHKoZIzj0CAQYIKoZI
+      zj0DAQcDQgAE/4x0a1HYvispF/3jxpNzSJG4+rKOVVZfIc8c6+h/kt4Y7H8m5ano
+      wxLt2/Zxsq37Cxooh0HSM05stdM6g2i3paOBlTCBkjAOBgNVHQ8BAf8EBAMCAQYw
+      EgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUGwXonl+GsbaeD4WMFiJPXhme
+      HUMwHwYDVR0jBBgwFoAUtk+xqvw0f1EpCdCt7IArEzfx+V0wLAYDVR0eAQH/BCIw
+      IKAeMAyCCnRzLmVyZXRob24wDoIMaG9tZS5lcmV0aG9uMAoGCCqGSM49BAMCA0gA
+      MEUCIBxCy915nTjTI8KMOmnR7LsUA2Al/s4BchlRk/t2WFiZAiEA4JAcpMhve27/
+      cfGASeMdyf4brBneQYsKfllKTCUDsI4=
+      -----END CERTIFICATE-----
+    ''
+  ];
 }
