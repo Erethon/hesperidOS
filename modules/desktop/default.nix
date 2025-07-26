@@ -64,6 +64,10 @@ in
     whois
     tmuxPlugins.fzf-tmux-url
     xclip
+    jq
   ];
-  programs.ssh.startAgent = true;
+  programs = {
+    ssh.startAgent = true;
+    slock.enable = true;
+  };
 }
