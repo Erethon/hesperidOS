@@ -31,6 +31,7 @@
         buildInputs = with nixpkgs.legacyPackages.x86_64-linux; [
           just
           statix
+          pre-commit
         ];
       };
 
