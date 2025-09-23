@@ -45,6 +45,7 @@ in
     notmuch
     isync
     msmtp
+    nix-output-monitor
     dmenu
     rxvt-unicode
     dunst
