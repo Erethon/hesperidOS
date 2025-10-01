@@ -3,9 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
-    #mynixpkgs.url = "github:NixOS/nixpkgs/master";
+    unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
+    mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
+    disko = {
+        url = "github:nix-community/disko";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -20,9 +24,11 @@
     {
       self,
       nixpkgs,
+      unstablenixpkgs,
       impermanence,
       agenix,
-      #mynixpkgs,
+      mynixpkgs,
+      disko,
       ...
     }@inputs:
     {
@@ -43,7 +49,7 @@
             ./hosts/nixosrnd/default.nix
           ];
         };
-        niato = nixpkgs.lib.nixosSystem {
+        niato = unstablenixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/niato/default.nix
@@ -57,7 +63,7 @@
             impermanence.nixosModules.impermanence
           ];
         };
-        nixosrnd = nixpkgs.lib.nixosSystem {
+        nixosrnd = mynixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/nixosrnd/default.nix
@@ -101,8 +107,17 @@
         };
         hetzner-x86_64 = nixpkgs.lib.nixosSystem {
           modules = [
+            disko.nixosModules.disko
             ./default.nix
             ./hosts/hetzner/default.nix
+            ./hosts/hetzner/disko.nix
+          ];
+        };
+        hetznerbuilder = nixpkgs.lib.nixosSystem {
+          modules = [
+            disko.nixosModules.disko
+            ./default.nix
+            ./hosts/hetznerbuilder/default.nix
           ];
         };
         warden = nixpkgs.lib.nixosSystem {

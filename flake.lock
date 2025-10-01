@@ -10,16 +10,36 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1750173260,
-        "narHash": "sha256-9P1FziAwl5+3edkfFcr5HeGtQUtrSdk/MksX39GieoA=",
+        "lastModified": 1754433428,
+        "narHash": "sha256-NA/FT2hVhKDftbHSwVnoRTFhes62+7dxZbxj5Gxvghs=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "531beac616433bac6f9e2a19feb8e99a22a66baf",
+        "rev": "9edb1787864c4f59ae5074ad498b6272b3ec308d",
         "type": "github"
       },
       "original": {
         "owner": "ryantm",
         "repo": "agenix",
+        "type": "github"
+      }
+    },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758287904,
+        "narHash": "sha256-IGmaEf3Do8o5Cwp1kXBN1wQmZwQN3NLfq5t4nHtVtcU=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "67ff9807dd148e704baadbd4fd783b54282ca627",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
         "type": "github"
       }
     },
@@ -38,13 +58,25 @@
         "type": "github"
       }
     },
+    "mynixpkgs": {
+      "locked": {
+        "lastModified": 1759260388,
+        "narHash": "sha256-yVO6LPDtCo6e1YdF5RYAX7LvgeZ7n80qIvMqiCs/2Co=",
+        "path": "/home/dgrig/Code/Nix/nixpkgs",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/dgrig/Code/Nix/nixpkgs",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1753345091,
-        "narHash": "sha256-CdX2Rtvp5I8HGu9swBmYuq+ILwRxpXdJwlpg8jvN4tU=",
+        "lastModified": 1759143472,
+        "narHash": "sha256-TvODmeR2W7yX/JmOCmP+lAFNkTT7hAxYcF3Kz8SZV3w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3ff0e34b1383648053bba8ed03f201d3466f90c9",
+        "rev": "5ed4e25ab58fd4c028b59d5611e14ea64de51d23",
         "type": "github"
       },
       "original": {
@@ -57,8 +89,11 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "disko": "disko",
         "impermanence": "impermanence",
-        "nixpkgs": "nixpkgs"
+        "mynixpkgs": "mynixpkgs",
+        "nixpkgs": "nixpkgs",
+        "unstablenixpkgs": "unstablenixpkgs"
       }
     },
     "systems": {
@@ -73,6 +108,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "unstablenixpkgs": {
+      "locked": {
+        "lastModified": 1759307475,
+        "narHash": "sha256-cSjRukDtOg71bucME/Mkd1wIpG4UiTkNTvSvgKuGbqs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "56e28ac19c40b8abc05a4b50351f049938832a8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
         "type": "github"
       }
     }
