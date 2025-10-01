@@ -4,6 +4,11 @@
   pkgs,
   ...
 }:
+let
+  hostConfig = {
+    ts.ip = "198.18.1.2";
+  };
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -12,6 +17,10 @@
 
   unbound.tsdomain = "ts.erethon";
   boot = {
+    kernelParams = [
+      "pci=nocrs"
+      "thinkpad_acpi.fan_control=1"
+    ];
     loader.efi.canTouchEfiVariables = true;
     loader.grub = {
       enable = true;
@@ -28,7 +37,7 @@
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
-  networking.hostName = "niato"; # Define your hostname.
+  networking.hostName = "niato";
   time.timeZone = "Europe/Athens";
 
   environment.systemPackages = with pkgs; [
@@ -37,17 +46,34 @@
     wirelesstools
     acpilight
     netdiscover
+    macchanger
+    unixtools.ifconfig
   ];
 
+  systemd.services.caddy.wantedBy = lib.mkForce [ ];
   services = {
+    thinkfan = {
+      enable = true;
+      levels = [
+        [
+          0
+          0
+          65535
+        ]
+      ];
+    };
     openssh.enable = lib.mkForce false;
     tailscale = {
       enable = true;
       useRoutingFeatures = "client";
       disableTaildrop = true;
+      disableUpstreamLogging = true;
     };
     fstrim.enable = true;
+    tlp.enable = true;
   };
+
   security.sudo.wheelNeedsPassword = lib.mkForce true;
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
+  _module.args.hostConfig = hostConfig;
 }
