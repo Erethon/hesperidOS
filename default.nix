@@ -56,10 +56,13 @@
 
   nix = {
     package = pkgs.lix;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        trusted-users = [ "dgrig" ];
+    };
     optimise.automatic = true;
   };
   services = {
@@ -94,4 +97,6 @@
       -----END CERTIFICATE-----
     ''
   ];
+
+  documentation.doc.enable = false;
 }
