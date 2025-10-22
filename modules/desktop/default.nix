@@ -43,6 +43,7 @@ in
     difftastic
     neomutt
     notmuch
+    nix-output-monitor
     isync
     msmtp
     nix-output-monitor
