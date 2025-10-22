@@ -10,6 +10,7 @@
         "tmp"
         ".config/io.datasette.llm"
         ".config/gh"
+        ".config/ghostty"
         ".ssh"
         ".mbsync"
         ".mutt"

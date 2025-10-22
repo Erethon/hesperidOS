@@ -47,7 +47,7 @@ in
     msmtp
     nix-output-monitor
     dmenu
-    rxvt-unicode
+    ghostty
     dunst
     keepassxc
     scrot
