@@ -72,7 +72,7 @@
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
-        PermitRootLogin = lib.mkDefault "no";
+        PermitRootLogin = lib.mkForce "no";
       };
     };
     locate.enable = true;
