@@ -56,6 +56,7 @@
             ./modules/common/default.nix
             ./modules/desktop/default.nix
             ./modules/persistence/default.nix
+            ./modules/physical/default.nix
             ./modules/emacs/default.nix
             ./modules/firefox/default.nix
             ./modules/sdr/default.nix
