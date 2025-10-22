@@ -18,7 +18,6 @@ in
   unbound.tsdomain = "ts.erethon";
   boot = {
     kernelParams = [
-      "pci=nocrs"
       "thinkpad_acpi.fan_control=1"
     ];
     loader.efi.canTouchEfiVariables = true;
