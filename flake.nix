@@ -92,6 +92,17 @@
             }
           ];
         };
+        rpi4k3s1 = nixpkgs.lib.nixosSystem {
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
+            ./default.nix
+            ./hosts/rpi4k3s1/default.nix
+            {
+              sdImage.compressImage = false;
+              nixpkgs.hostPlatform = "aarch64-linux";
+            }
+          ];
+        };
         nixosvpn = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
