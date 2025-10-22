@@ -62,6 +62,11 @@ in
             type = "A";
             value = "198.18.1.2";
           }
+          {
+            name = "radicale.ts.erethon";
+            type = "A";
+            value = "198.18.1.4";
+          }
         ];
       };
       prefixes.v4 = "198.18.1.0/24";
