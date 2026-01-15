@@ -11,6 +11,7 @@
         ".config/io.datasette.llm"
         ".config/gh"
         ".config/ghostty"
+        ".config/opencode"
         ".ssh"
         ".mbsync"
         ".mutt"

@@ -67,6 +67,7 @@ in
     tmuxPlugins.fzf-tmux-url
     xclip
     jq
+    (llm.withPlugins {llm-anthropic = true;})
   ];
   programs = {
     ssh.startAgent = true;

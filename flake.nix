@@ -2,9 +2,9 @@
   description = "Erethon's (dgrig) NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
-    mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
+    #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
     disko = {
         url = "github:nix-community/disko";
@@ -27,7 +27,7 @@
       unstablenixpkgs,
       impermanence,
       agenix,
-      mynixpkgs,
+      #mynixpkgs,
       disko,
       ...
     }@inputs:
@@ -64,7 +64,7 @@
             impermanence.nixosModules.impermanence
           ];
         };
-        nixosrnd = mynixpkgs.lib.nixosSystem {
+        nixosrnd = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/nixosrnd/default.nix

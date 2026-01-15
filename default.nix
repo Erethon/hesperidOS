@@ -39,6 +39,9 @@
     extraGroups = [
       "wheel"
       "plugdev"
+      # Needed for USB gadgets and printing
+      # "dialout"
+      # "lp"
     ];
     initialPassword = "vmonlypass";
     openssh.authorizedKeys.keys = [
