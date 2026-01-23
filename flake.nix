@@ -6,9 +6,13 @@
     unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
     #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
+#    microvm = {
+#      url = "github:microvm-nix/microvm.nix";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
     disko = {
-        url = "github:nix-community/disko";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
@@ -23,12 +27,13 @@
   outputs =
     {
       self,
+      agenix,
+      disko,
+      impermanence,
+      #microvm,
       nixpkgs,
       unstablenixpkgs,
-      impermanence,
-      agenix,
       #mynixpkgs,
-      disko,
       ...
     }@inputs:
     {
@@ -49,8 +54,21 @@
             ./hosts/nixosrnd/default.nix
           ];
         };
+        sobeck = unstablenixpkgs.lib.nixosSystem {
+          modules = [
+            impermanence.nixosModules.impermanence
+            ./default.nix
+            ./hosts/sobeck/default.nix
+            ./modules/common/default.nix
+            ./modules/persistence/default.nix
+            ./modules/physical/default.nix
+            ./modules/unbound/default.nix
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
+          ];
+        };
         niato = unstablenixpkgs.lib.nixosSystem {
           modules = [
+            #microvm.nixosModules.host
             ./default.nix
             ./hosts/niato/default.nix
             ./modules/common/default.nix
@@ -139,6 +157,24 @@
             ./hosts/warden/default.nix
             impermanence.nixosModules.impermanence
             agenix.nixosModules.default
+          ];
+        };
+        mvm1 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./default.nix
+            #microvm.nixosModules.microvm
+            {
+                networking.hostName = "mvm1";
+                microvm.hypervisor = "cloud-hypervisor";
+               microvm.interfaces = [
+              {
+                type = "tap";
+                id = "user0";
+                mac = "02:00:00:00:00:01";
+              }
+            ];
+            }
           ];
         };
       };
