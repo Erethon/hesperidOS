@@ -12,6 +12,7 @@ let
 in
 {
   services = {
+    opensnitch.enable = true;
     xserver = {
       enable = true;
       xkb = {
@@ -46,7 +47,6 @@ in
     nix-output-monitor
     isync
     msmtp
-    nix-output-monitor
     dmenu
     ghostty
     dunst
@@ -60,6 +60,7 @@ in
     rclone
     pavucontrol
     mpv
+    mplayer
     lm_sensors
     rtorrent
     slock
@@ -67,6 +68,7 @@ in
     tmuxPlugins.fzf-tmux-url
     xclip
     jq
+    opensnitch-ui
     (llm.withPlugins {llm-anthropic = true;})
   ];
   programs = {
