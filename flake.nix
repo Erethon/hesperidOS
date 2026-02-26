@@ -6,14 +6,10 @@
     unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
     #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
-#    microvm = {
-#      url = "github:microvm-nix/microvm.nix";
-#      inputs.nixpkgs.follows = "nixpkgs";
-#    };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #    microvm = {
+    #      url = "github:microvm-nix/microvm.nix";
+    #      inputs.nixpkgs.follows = "nixpkgs";
+    #    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -28,7 +24,6 @@
     {
       self,
       agenix,
-      disko,
       impermanence,
       #microvm,
       nixpkgs,
