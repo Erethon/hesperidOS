@@ -135,21 +135,6 @@
             ./modules/unbound/default.nix
           ];
         };
-        hetzner-x86_64 = nixpkgs.lib.nixosSystem {
-          modules = [
-            disko.nixosModules.disko
-            ./default.nix
-            ./hosts/hetzner/default.nix
-            ./hosts/hetzner/disko.nix
-          ];
-        };
-        hetznerbuilder = nixpkgs.lib.nixosSystem {
-          modules = [
-            disko.nixosModules.disko
-            ./default.nix
-            ./hosts/hetznerbuilder/default.nix
-          ];
-        };
         warden = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
@@ -157,24 +142,6 @@
             ./hosts/warden/default.nix
             impermanence.nixosModules.impermanence
             agenix.nixosModules.default
-          ];
-        };
-        mvm1 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./default.nix
-            #microvm.nixosModules.microvm
-            {
-                networking.hostName = "mvm1";
-                microvm.hypervisor = "cloud-hypervisor";
-               microvm.interfaces = [
-              {
-                type = "tap";
-                id = "user0";
-                mac = "02:00:00:00:00:01";
-              }
-            ];
-            }
           ];
         };
       };
