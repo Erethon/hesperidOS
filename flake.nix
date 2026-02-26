@@ -77,7 +77,7 @@
             ./modules/physical/default.nix
             ./modules/emacs/default.nix
             ./modules/firefox/default.nix
-            ./modules/sdr/default.nix
+            #./modules/sdr/default.nix
             ./modules/unbound/default.nix
             impermanence.nixosModules.impermanence
           ];
