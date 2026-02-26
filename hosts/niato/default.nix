@@ -49,7 +49,7 @@ in
     unixtools.ifconfig
   ];
 
-  systemd.services.caddy.wantedBy = lib.mkForce [ ];
+  #systemd.services.caddy.wantedBy = lib.mkForce [ ];
   services = {
     thinkfan = {
       enable = true;
