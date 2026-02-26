@@ -1,5 +1,5 @@
 {
-imports = [
-./monitoring.nix
-];
+  imports = [
+    ./monitoring.nix
+  ];
 }
