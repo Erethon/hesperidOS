@@ -22,7 +22,6 @@
         ".local/share/eva"
       ];
       files = [
-        ".aider.conf.yml"
         ".tmux.conf"
         ".zshrc"
         ".gitconfig"
