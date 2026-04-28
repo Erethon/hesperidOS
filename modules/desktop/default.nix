@@ -69,7 +69,7 @@ in
     xclip
     jq
     opensnitch-ui
-    (llm.withPlugins {llm-anthropic = true;})
+    (llm.withPlugins {llm-openai-plugin = true;})
   ];
   programs = {
     ssh.startAgent = true;

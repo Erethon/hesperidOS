@@ -61,6 +61,20 @@
             { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
         };
+        orinoco = unstablenixpkgs.lib.nixosSystem {
+          modules = [
+            impermanence.nixosModules.impermanence
+            ./default.nix
+            ./hosts/orinoco/default.nix
+            ./modules/common/default.nix
+            ./modules/desktop/default.nix
+            ./modules/persistence/default.nix
+            ./modules/physical/default.nix
+            ./modules/emacs/default.nix
+            ./modules/firefox/default.nix
+            ./modules/unbound/default.nix
+          ];
+        };
         niato = unstablenixpkgs.lib.nixosSystem {
           modules = [
             #microvm.nixosModules.host
