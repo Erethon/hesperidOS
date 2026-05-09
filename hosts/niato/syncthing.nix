@@ -15,7 +15,7 @@
         crashReportingEnable = false;
         globalAnnounceEnabled = false;
         localAnnounceEnabled = false;
-        listenAddresses = [ "100.64.0.1" ];
+        listenAddresses = [ "tcp4://niato.ts.erethon:22000" ];
       };
       devices = {
         "oricono" = {

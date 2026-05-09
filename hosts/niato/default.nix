@@ -15,7 +15,8 @@ in
     ./syncthing.nix
   ];
 
-  unbound.tsdomain = "ts.erethon";
+  unbound.tsDomain = "ts.erethon";
+  unbound.homeDomain = "home.erethon";
   boot = {
     kernelParams = [
       "thinkpad_acpi.fan_control=1"
