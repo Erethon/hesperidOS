@@ -5,6 +5,7 @@
 }:
 {
   environment.systemPackages = with pkgs; [
+    any-nix-shell
     bat
     btop
     curl
@@ -53,18 +54,23 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    promptInit = ''
+      any-nix-shell zsh --info-right | source /dev/stdin
+    '';
+  };
 
   networking.firewall.enable = true;
 
   nix = {
     package = pkgs.lix;
     settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        trusted-users = [ "dgrig" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [ "dgrig" ];
     };
     optimise.automatic = true;
   };
