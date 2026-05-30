@@ -12,7 +12,12 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./services-configuration.nix
+    ./syncthing.nix
   ];
+
+  unbound.tsDomain = "ts.erethon";
+  unbound.homeDomain = "home.erethon";
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -33,6 +38,9 @@ in
     };
     defaultGateway = "192.168.1.1";
   };
+
+  time.timeZone = "Europe/Athens";
+
   _module.args.hostConfig = hostConfig;
   system.stateVersion = "26.05";
 }
