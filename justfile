@@ -8,7 +8,7 @@ format:
     nix fmt **/*.nix
 
 build host:
-    nixos-rebuild build --flake .#{{host}} |& nom
+    nixos-rebuild build --log-format internal-json --flake .#{{host}} |& nom --json
 
 update date-arg="":
     #!/usr/bin/env bash
@@ -21,7 +21,7 @@ update date-arg="":
     fi
 
 build-livecd:
-    nix build .#nixosConfigurations.livecd.config.system.build.isoImage |& nom
+    nix build --log-format internal-json .#nixosConfigurations.livecd.config.system.build.isoImage |& nom --json
 
 clean:
     rm -rf result *qcow2
