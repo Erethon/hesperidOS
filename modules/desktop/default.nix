@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   custom_terminus = pkgs.terminus_font.overrideAttrs (
     _: _: {
@@ -69,10 +69,13 @@ in
     xclip
     jq
     opensnitch-ui
-    (llm.withPlugins {llm-openai-plugin = true;})
+    (llm.withPlugins { llm-openai-plugin = true; })
   ];
+
   programs = {
     ssh.startAgent = true;
     slock.enable = true;
   };
+
+  security.sudo.wheelNeedsPassword = lib.mkForce true;
 }

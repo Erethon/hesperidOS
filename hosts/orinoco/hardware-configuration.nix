@@ -32,6 +32,7 @@
       };
       efi.canTouchEfiVariables = true;
     };
+    zfs.forceImportRoot = false;
   };
   fileSystems = {
     "/" = {

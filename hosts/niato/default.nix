@@ -73,7 +73,6 @@ in
     tlp.enable = true;
   };
 
-  security.sudo.wheelNeedsPassword = lib.mkForce true;
   system.stateVersion = "23.11"; # DO NOT CHANGE ME
   _module.args.hostConfig = hostConfig;
 }
