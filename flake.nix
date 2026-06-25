@@ -2,7 +2,7 @@
   description = "Erethon's (dgrig) NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
     #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
