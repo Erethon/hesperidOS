@@ -13,6 +13,7 @@
         ".config/ghostty"
         ".config/mozilla"
         ".config/opencode"
+        ".config/tridactyl"
         ".ssh"
         ".mbsync"
         ".mutt"
@@ -21,12 +22,14 @@
         ".emacs.d"
         ".ollama"
         ".local/share/eva"
+        ".local/share/opencode"
       ];
       files = [
         ".tmux.conf"
         ".zshrc"
         ".gitconfig"
         ".histfile"
+        ".cache/keepassxc/keepassxc.ini"
         ".config/ls_col"
         ".aliases"
         ".Xdefaults"
