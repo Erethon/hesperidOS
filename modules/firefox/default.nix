@@ -49,10 +49,6 @@
           Value = false;
           Status = "locked";
         };
-        "media.peerconnection.enabled" = {
-          Value = false;
-          Status = "locked";
-        };
         "privacy.donottrackheader.enabled" = {
           Value = true;
           Status = "locked";
