@@ -77,5 +77,6 @@ in
     slock.enable = true;
   };
 
+  documentation.enable = lib.mkForce true;
   security.sudo.wheelNeedsPassword = lib.mkForce true;
 }
