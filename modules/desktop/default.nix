@@ -70,6 +70,8 @@ in
     jq
     opensnitch-ui
     (llm.withPlugins { llm-openai-plugin = true; })
+    nmap
+    netdiscover
   ];
 
   programs = {
