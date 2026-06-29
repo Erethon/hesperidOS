@@ -1,9 +1,13 @@
+{ pkgs, ... }:
 {
   # This is signed by Mozilla so it can be used as is. The source for this xpi
   # is redirect.js and redirect.manifest.json
   environment.etc."firefox/extensions/redirect-extension.xpi".source = ./redirect.xpi;
 
   programs.firefox = {
+    nativeMessagingHosts.packages = [
+      pkgs.tridactyl-native
+    ];
     enable = true;
     policies = {
       DisableTelemetry = true;
