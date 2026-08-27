@@ -17,5 +17,5 @@
   networking.hostName = "nixosrnd";
   time.timeZone = "Europe/Athens";
 
-  system.stateVersion = "23.11"; # DO NOT CHANGE ME
+  system.stateVersion = "26.05"; # DO NOT CHANGE ME
 }

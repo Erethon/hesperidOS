@@ -96,7 +96,7 @@
             impermanence.nixosModules.impermanence
           ];
         };
-        nixosrnd = nixpkgs.lib.nixosSystem {
+        nixosrnd = unstablenixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/nixosrnd/default.nix
