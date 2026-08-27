@@ -43,8 +43,6 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4702886/karakeep-1.2.9.xpi";
           installation_mode = "force_installed";
         };
-        "wikiredirect@dgrig.com" = {
-          install_url = "file:///etc/firefox/extensions/redirect-extension.xpi";
           installation_mode = "force_installed";
         };
       };
