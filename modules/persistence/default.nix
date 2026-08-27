@@ -7,7 +7,9 @@
         "Vault"
         "Downloads"
         "mail"
+        "Sessions"
         "tmp"
+        ".cache/huggingface"
         ".config/io.datasette.llm"
         ".config/gh"
         ".config/ghostty"
@@ -23,6 +25,7 @@
         ".ollama"
         ".local/share/eva"
         ".local/share/opencode"
+        ".newsboat"
       ];
       files = [
         ".tmux.conf"
@@ -34,6 +37,7 @@
         ".aliases"
         ".Xdefaults"
         ".xprofile"
+        ".mailcap"
         ".mbsyncrc"
         ".muttrc"
         ".msmtprc"
