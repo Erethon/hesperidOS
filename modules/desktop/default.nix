@@ -40,45 +40,45 @@ in
   fonts.packages = [ custom_terminus ];
 
   environment.systemPackages = with pkgs; [
-    age
-    difftastic
-    neomutt
-    notmuch
-    nix-output-monitor
-    isync
-    msmtp
-    dmenu
-    ghostty
-    dunst
-    keepassxc
-    scrot
-    feh
-    borgbackup
-    git-annex
-    gimp
-    gh
-    rclone
-    pavucontrol
-    mpv
-    mplayer
-    lm_sensors
-    rtorrent
-    slock
-    whois
-    tmuxPlugins.fzf-tmux-url
-    xclip
-    jq
-    opensnitch-ui
     (llm.withPlugins { llm-openai-plugin = true; })
-    nmap
-    netdiscover
-    ungoogled-chromium
-    newsboat
-    xdotool
-    nh
-    hydra-check
-    files-to-prompt
+    age
+    borgbackup
+    difftastic
+    dmenu
+    dunst
     exiftool
+    feh
+    files-to-prompt
+    gh
+    ghostty
+    gimp
+    git-annex
+    hydra-check
+    isync
+    jq
+    keepassxc
+    lm_sensors
+    mplayer
+    mpv
+    msmtp
+    neomutt
+    netdiscover
+    newsboat
+    nh
+    nix-output-monitor
+    nmap
+    notmuch
+    opensnitch-ui
+    pavucontrol
+    rclone
+    rtorrent
+    scrot
+    slock
+    tmuxPlugins.fzf-tmux-url
+    ungoogled-chromium
+    whois
+    xclip
+    xdotool
   ];
 
   programs = {

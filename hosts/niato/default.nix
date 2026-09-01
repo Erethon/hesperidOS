@@ -41,13 +41,12 @@ in
   time.timeZone = "Europe/Athens";
 
   environment.systemPackages = with pkgs; [
-    wpa_supplicant
     acpi
-    wirelesstools
     acpilight
-    netdiscover
     macchanger
     unixtools.ifconfig
+    wirelesstools
+    wpa_supplicant
   ];
 
   #systemd.services.caddy.wantedBy = lib.mkForce [ ];

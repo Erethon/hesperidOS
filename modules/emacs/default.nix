@@ -9,9 +9,9 @@
       epkgs.nix-mode
       epkgs.notmuch
       epkgs.org-caldav
+      epkgs.org-contacts
       epkgs.org-re-reveal
       epkgs.org-roam
-      epkgs.org-contacts
       epkgs.projectile
       epkgs.rust-mode
       epkgs.terraform-mode
