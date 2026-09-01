@@ -72,10 +72,13 @@ in
     (llm.withPlugins { llm-openai-plugin = true; })
     nmap
     netdiscover
-    # needed for some sites that refuse to work with my Firefox profiles
     ungoogled-chromium
     newsboat
     xdotool
+    nh
+    hydra-check
+    files-to-prompt
+    exiftool
   ];
 
   programs = {
