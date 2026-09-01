@@ -30,8 +30,17 @@ in
       server_url = "https://hs.erethon.com";
       metrics_listen_addr = "${hostip}:9099";
       dns = {
+        nameservers.global = [
+          "192.168.1.1"
+          "1.1.1.1"
+        ];
         base_domain = "ts.erethon";
         extra_records = [
+          {
+            name = "paperless.ts.erethon";
+            type = "A";
+            value = "198.18.1.4";
+          }
           {
             name = "immich.ts.erethon";
             type = "A";
@@ -44,6 +53,11 @@ in
           }
           {
             name = "budget.ts.erethon";
+            type = "A";
+            value = "198.18.1.4";
+          }
+          {
+            name = "ha.ts.erethon";
             type = "A";
             value = "198.18.1.4";
           }
@@ -105,6 +119,22 @@ in
       address = "192.168.135.1";
       interface = "ens3";
     };
+    nameservers = [ "1.1.1.1" ];
+  };
+
+  services.matrix-alertmanager = {
+    enable = true;
+    port = 4001;
+    matrixUser = "@spasoklampanias:erethon.com";
+    homeserverUrl = "https://matrix.erethon.com";
+    tokenFile = "/var/lib/matrix-alertmanager/token";
+    secretFile = "/var/lib/matrix-alertmanager/webhook";
+    matrixRooms = [
+      {
+        receivers = [ "matrix" ];
+        roomId = "!vnsveDOHvKaeBpXKxS:erethon.com";
+      }
+    ];
   };
 
   documentation.enable = false;
