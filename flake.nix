@@ -10,10 +10,10 @@
     #      url = "github:microvm-nix/microvm.nix";
     #      inputs.nixpkgs.follows = "nixpkgs";
     #    };
-    #disko = {
-    #  url = "github:nix-community/disko";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -28,7 +28,7 @@
     {
       self,
       agenix,
-      #disko,
+      disko,
       impermanence,
       #microvm,
       nixpkgs,
@@ -47,6 +47,23 @@
       };
 
       nixosConfigurations = {
+        okeanos1 = unstablenixpkgs.lib.nixosSystem {
+          modules = [
+            disko.nixosModules.disko
+            ./default.nix
+            ./hosts/okeanos1/default.nix
+          ];
+        };
+        darky = unstablenixpkgs.lib.nixosSystem {
+          modules = [
+            impermanence.nixosModules.impermanence
+            disko.nixosModules.disko
+            ./default.nix
+            ./modules/persistence/default.nix
+            ./modules/physical/default.nix
+            ./hosts/darky/default.nix
+          ];
+        };
         vm = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
@@ -56,9 +73,11 @@
         };
         sobeck = unstablenixpkgs.lib.nixosSystem {
           modules = [
+            disko.nixosModules.disko
             impermanence.nixosModules.impermanence
             ./default.nix
             ./hosts/sobeck/default.nix
+            ./modules/bgp/default.nix
             ./modules/common/default.nix
             ./modules/persistence/default.nix
             ./modules/physical/default.nix
@@ -136,7 +155,7 @@
             }
           ];
         };
-        nixosvpn = nixpkgs.lib.nixosSystem {
+        nixosvpn = unstablenixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
             ./hosts/nixosvpn/default.nix
