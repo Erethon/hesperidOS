@@ -1,27 +1,20 @@
-{ config, hostConfig, ... }:
+{ config, lib, hostConfig, ... }:
 let
   ts_domain = "ts.erethon";
   node_domain = "node.${config.networking.hostName}.${ts_domain}";
+  prometheus_host = "2a06:9801:74d::3";
 in
 {
   config = {
     services.prometheus.exporters.node = {
       enable = true;
+      openFirewall = true;
       enabledCollectors = [
         "systemd"
       ];
-      listenAddress = "127.0.0.1";
-      port = 9100;
-    };
-    services.caddy = {
-      acmeCA = "https://warden.ts.erethon/acme/acme/directory";
-      enable = true;
-      virtualHosts.${node_domain} = {
-        listenAddresses = [ hostConfig.ts.ip ];
-        extraConfig = ''
-          reverse_proxy localhost:9100
-        '';
-      };
+      firewallRules = ''
+        ip6 saddr $prometheus_host tcp dport ${toString config.services.prometheus.exporters.node.port} accept
+      '';
     };
   };
 }
