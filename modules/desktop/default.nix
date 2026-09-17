@@ -88,4 +88,5 @@ in
 
   documentation.enable = lib.mkForce true;
   security.sudo.wheelNeedsPassword = lib.mkForce true;
+  users.users.dgrig.extraGroups = [ "dialout" ];
 }
