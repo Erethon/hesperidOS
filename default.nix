@@ -67,7 +67,7 @@
       enable = true;
       tables."nixos-fw".content = lib.mkBefore ''
         define prometheus_host = {
-          2a06:9801:74d::3
+          2a06:9801:74d::4
         }
       '';
     };
