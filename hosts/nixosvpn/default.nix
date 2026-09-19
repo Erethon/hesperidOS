@@ -14,7 +14,6 @@ in
       enable = true;
       device = "/dev/vda";
     };
-    kernelParams = [ "console=ttyS0" ];
   };
 
   time.timeZone = "UTC";
