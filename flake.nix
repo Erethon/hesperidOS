@@ -6,10 +6,10 @@
     unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
     #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
-    #    microvm = {
-    #      url = "github:microvm-nix/microvm.nix";
-    #      inputs.nixpkgs.follows = "nixpkgs";
-    #    };
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +30,7 @@
       agenix,
       disko,
       impermanence,
-      #microvm,
+      microvm,
       nixpkgs,
       unstablenixpkgs,
       #mynixpkgs,
@@ -52,6 +52,15 @@
             disko.nixosModules.disko
             ./default.nix
             ./hosts/okeanos1/default.nix
+            ./modules/common/default.nix
+          ];
+        };
+        sectracker = nixpkgs.lib.nixosSystem {
+          modules = [
+            #disko.nixosModules.disko
+            ./default.nix
+            ./modules/physical/default.nix
+            ./hosts/sectracker/default.nix
           ];
         };
         darky = unstablenixpkgs.lib.nixosSystem {
@@ -75,12 +84,14 @@
           modules = [
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
+            microvm.nixosModules.host
             ./default.nix
             ./hosts/sobeck/default.nix
             ./modules/bgp/default.nix
             ./modules/common/default.nix
             ./modules/persistence/default.nix
             ./modules/physical/default.nix
+            ./modules/initrdssh/default.nix
             ./modules/unbound/default.nix
             { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
