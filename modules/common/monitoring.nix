@@ -1,11 +1,28 @@
-{ config, lib, hostConfig, ... }:
+{
+  config,
+  lib,
+  hostConfig,
+  ...
+}:
 let
-  ts_domain = "ts.erethon";
-  node_domain = "node.${config.networking.hostName}.${ts_domain}";
-  prometheus_host = "2a06:9801:74d::3";
+  nodeExp = config.services.prometheus.exporters.node;
 in
 {
+  options.erethon.network.mainIP = lib.mkOption {
+    type = lib.types.str;
+    default = "::1";
+  };
+
   config = {
+    erethon.dns.records = {
+      "_prometheus._tcp.hosts.as197174".SRV.values = [
+        "0 0 ${toString nodeExp.port} ${config.networking.hostName}.hosts.as197174.anthoid.eu."
+      ];
+      "${config.networking.hostName}.hosts.as197174".AAAA.values = [
+        config.erethon.network.mainIP
+      ];
+    };
+
     services.prometheus.exporters.node = {
       enable = true;
       openFirewall = true;
@@ -13,7 +30,7 @@ in
         "systemd"
       ];
       firewallRules = ''
-        ip6 saddr $prometheus_host tcp dport ${toString config.services.prometheus.exporters.node.port} accept
+        ip6 saddr $prometheus_host tcp dport ${toString nodeExp.port} accept
       '';
     };
   };
