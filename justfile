@@ -1,3 +1,5 @@
+dns_dir := "infrastructure/dns"
+
 default:
     @just --list
 
@@ -28,3 +30,36 @@ clean:
 
 check-flake:
     nix flake check
+
+dns-records:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tmp="$(mktemp)"
+    nix eval --json .#dnsRecords > "$tmp"
+    mv "$tmp" {{dns_dir}}/nix-records.json
+
+dns-apply: dns-records
+    #!/usr/bin/env bash
+    set -euo pipefail
+    export PDNS_API_KEY="$(< ~/Vault/pdns)"
+    tofu -chdir={{dns_dir}} apply
+
+deploy host target="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    case "{{host}}" in
+      niato)  default_target="" ;;
+      darky)  default_target="95.217.227.105" ;;
+    esac
+
+    target={{quote(target)}}
+    target="${target:-$default_target}"
+
+    args=(switch --flake ".#{{host}}" --sudo)
+    if [[ -n "$target" ]]; then
+      args+=(--target-host "$target" --use-remote-sudo)
+    fi
+
+    NIX_SSHOPTS="-l dgrig -p 222" nixos-rebuild "${args[@]}"
+    just dns-apply
