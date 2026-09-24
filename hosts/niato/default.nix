@@ -8,13 +8,24 @@ let
   hostConfig = {
     ts.ip = "198.18.1.2";
   };
+  siteIP = "2a06:9801:74d::5";
+  siteSubnet = "3000";
+  routerID = "192.168.42.42";
+  hostname = "niato";
 in
 {
   imports = [
     ./hardware-configuration.nix
     ./syncthing.nix
   ];
-
+  erethon = {
+    network.mainIP = siteIP;
+    bgp = {
+      siteIP = "5";
+      siteSubnet = siteSubnet;
+      routerID = "192.168.42.42";
+    };
+  };
   unbound.tsDomain = "ts.erethon";
   unbound.homeDomain = "home.erethon";
   boot = {
@@ -37,9 +48,14 @@ in
     binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
-  networking.hostName = "niato";
   time.timeZone = "Europe/Athens";
 
+  networking = {
+    hostName = hostname;
+    wireguard.interfaces.wg0 = {
+      ips = [ "${siteIP}/64" ];
+    };
+  };
   environment.systemPackages = with pkgs; [
     acpi
     acpilight
@@ -49,7 +65,6 @@ in
     wpa_supplicant
   ];
 
-  #systemd.services.caddy.wantedBy = lib.mkForce [ ];
   services = {
     thinkfan = {
       enable = true;
