@@ -2,33 +2,34 @@ locals {
   aszone    = "as197174.anthoid.eu."
   subdomain = "hosts"
 
-  srv_records = {
-    "_bird._tcp" = {
-      port  = 9324
-      hosts = ["bgp1", "sobeck", "darky"]
-    }
-    "_prometheus._tcp" = {
-      port  = 9100
-      hosts = ["bgp1", "sobeck", "darky"]
-    }
-  }
-
   a_records = {
-    darky = "95.217.227.105"
-    ns1   = "95.217.227.105"
-    ns2   = "95.217.227.105"
-    ns3   = "135.181.130.157"
+    darky    = "95.217.227.105"
+    ns1      = "95.217.227.105"
+    ns2      = "95.217.227.105"
+    ns3      = "135.181.130.157"
+    okeanos1 = "83.212.96.97"
   }
 
   hosts_records = {
-    bgp1   = "2a06:9801:74d::2"
-    sobeck = "2a06:9801:74d::3"
-    darky  = "2a06:9801:74d::4"
+    bgp1 = "2a06:9801:74d::2"
   }
 
   cname_records = {
     grafana = "darky"
   }
+
+  nix_records = jsondecode(file("${path.module}/nix-records.json"))
+
+  nix_records_flat = merge([
+    for name, types in local.nix_records : {
+      for type, r in types : "${name}/${type}" => {
+        name   = name
+        type   = type
+        ttl    = r.ttl
+        values = r.values
+      }
+    }
+  ]...)
 
 }
 
@@ -83,15 +84,12 @@ resource "powerdns_record" "hosts" {
   records = [each.value]
 }
 
-resource "powerdns_record" "srv" {
-  for_each = local.srv_records
+resource "powerdns_record" "nix" {
+  for_each = local.nix_records_flat
 
-  zone = powerdns_zone.anthoideu.name
-  name = "${each.key}.hosts.${local.aszone}"
-  type = "SRV"
-  ttl  = 300
-  records = [
-    for host in each.value.hosts :
-    "0 0 ${each.value.port} ${host}.hosts.${local.aszone}"
-  ]
+  zone    = powerdns_zone.anthoideu.name
+  name    = "${each.value.name}.anthoid.eu."
+  type    = each.value.type
+  ttl     = each.value.ttl
+  records = each.value.values
 }
