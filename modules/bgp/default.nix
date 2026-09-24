@@ -70,5 +70,16 @@ in
         '';
       };
     };
+    networking.wireguard.interfaces.wg0 = {
+      privateKeyFile = "/etc/wireguard/bgp1.key";
+      peers = [
+        {
+          publicKey = "7hHluC65oGAJQtWyoulYOtM1tcuw6sbyKj+GbNP49CU=";
+          endpoint = "103.146.103.235:51820";
+          allowedIPs = [ "::/0" ];
+          persistentKeepalive = 25;
+        }
+      ];
+    };
   };
 }
