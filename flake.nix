@@ -43,8 +43,27 @@
           just
           statix
           pre-commit
+          (opentofu.withPlugins (
+            plugin: with plugin; [
+              pan-net_powerdns
+            ]
+          ))
         ];
       };
+      dnsRecords =
+        let
+          lib = nixpkgs.lib;
+          perHost = lib.mapAttrsToList (
+            _: host: host.config.erethon.dns.records or { }
+          ) self.nixosConfigurations;
+        in
+        lib.zipAttrsWith (
+          _name: typesPerHost:
+          lib.zipAttrsWith (_type: recs: {
+            ttl = lib.foldl' lib.min 86400 (map (r: r.ttl) recs);
+            values = lib.unique (lib.concatMap (r: r.values) recs);
+          }) typesPerHost
+        ) perHost;
 
       nixosConfigurations = {
         okeanos1 = unstablenixpkgs.lib.nixosSystem {
@@ -55,28 +74,23 @@
             ./modules/common/default.nix
           ];
         };
-        sectracker = nixpkgs.lib.nixosSystem {
-          modules = [
-            #disko.nixosModules.disko
-            ./default.nix
-            ./modules/physical/default.nix
-            ./hosts/sectracker/default.nix
-          ];
-        };
         darky = unstablenixpkgs.lib.nixosSystem {
           modules = [
             impermanence.nixosModules.impermanence
             disko.nixosModules.disko
+            microvm.nixosModules.host
             ./default.nix
+            ./modules/bgp/default.nix
+            ./modules/common/default.nix
             ./modules/persistence/default.nix
             ./modules/physical/default.nix
+            ./modules/initrdssh/default.nix
             ./hosts/darky/default.nix
           ];
         };
         vm = nixpkgs.lib.nixosSystem {
           modules = [
             ./default.nix
-            ./modules/common/default.nix
             ./hosts/nixosrnd/default.nix
           ];
         };
@@ -112,18 +126,18 @@
         };
         niato = unstablenixpkgs.lib.nixosSystem {
           modules = [
-            #microvm.nixosModules.host
+            impermanence.nixosModules.impermanence
+            microvm.nixosModules.host
             ./default.nix
             ./hosts/niato/default.nix
+            ./modules/bgp/default.nix
             ./modules/common/default.nix
             ./modules/desktop/default.nix
             ./modules/persistence/default.nix
             ./modules/physical/default.nix
             ./modules/emacs/default.nix
             ./modules/firefox/default.nix
-            #./modules/sdr/default.nix
             ./modules/unbound/default.nix
-            impermanence.nixosModules.impermanence
           ];
         };
         nixosrnd = unstablenixpkgs.lib.nixosSystem {
@@ -149,17 +163,6 @@
             ./default.nix
             ./hosts/rpi4rf/default.nix
             ./modules/sdr/default.nix
-            {
-              sdImage.compressImage = false;
-              nixpkgs.hostPlatform = "aarch64-linux";
-            }
-          ];
-        };
-        rpi4k3s1 = nixpkgs.lib.nixosSystem {
-          modules = [
-            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
-            ./default.nix
-            ./hosts/rpi4k3s1/default.nix
             {
               sdImage.compressImage = false;
               nixpkgs.hostPlatform = "aarch64-linux";
