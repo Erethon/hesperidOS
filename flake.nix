@@ -53,17 +53,17 @@
       dnsRecords =
         let
           lib = nixpkgs.lib;
-          perHost = lib.mapAttrsToList (
-            _: host: host.config.erethon.dns.records or { }
-          ) self.nixosConfigurations;
+
+          mergeField = {
+            ttl = lib.foldl' lib.min 86400;
+            values = vs: lib.unique (lib.concatLists vs);
+          };
         in
-        lib.zipAttrsWith (
-          _name: typesPerHost:
-          lib.zipAttrsWith (_type: recs: {
-            ttl = lib.foldl' lib.min 86400 (map (r: r.ttl) recs);
-            values = lib.unique (lib.concatMap (r: r.values) recs);
-          }) typesPerHost
-        ) perHost;
+        lib.pipe self.nixosConfigurations [
+          lib.attrValues
+          (map (host: host.config.erethon.dns.records or { }))
+          (lib.zipAttrsWith (_name: lib.zipAttrsWith (_type: lib.zipAttrsWith (field: mergeField.${field}))))
+        ];
 
       nixosConfigurations = {
         okeanos1 = unstablenixpkgs.lib.nixosSystem {
