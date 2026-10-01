@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  hostname = "sobeck";
+in
 {
   imports = [
     ./disko.nix
@@ -22,9 +25,10 @@
   };
 
   networking = {
-    hostName = "sobeck";
+    hostName = hostname;
     hostId = "df1f1f1f";
   };
 
   time.timeZone = "Europe/Athens";
+  erethon.network.mainIP = "2a06:9801:74d::3";
 }
