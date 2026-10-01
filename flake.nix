@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
     unstablenixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
-    #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
     microvm = {
       url = "github:microvm-nix/microvm.nix";
@@ -27,17 +26,27 @@
       self,
       agenix,
       disko,
-      impermanence,
       microvm,
       nixpkgs,
       unstablenixpkgs,
-      #mynixpkgs,
       ...
     }@inputs:
+    let
+      pkgs = unstablenixpkgs.legacyPackages.x86_64-linux;
+      mkHost =
+        {
+          channel ? unstablenixpkgs,
+          modules,
+        }:
+        channel.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./default.nix ] ++ modules;
+        };
+    in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
-      devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-        buildInputs = with nixpkgs.legacyPackages.x86_64-linux; [
+      formatter.x86_64-linux = pkgs.nixfmt;
+      devShells.x86_64-linux.default = pkgs.mkShell {
+        buildInputs = with pkgs; [
           just
           statix
           pre-commit
@@ -64,20 +73,18 @@
         ];
 
       nixosConfigurations = {
-        okeanos1 = unstablenixpkgs.lib.nixosSystem {
+        okeanos1 = mkHost {
           modules = [
             disko.nixosModules.disko
-            ./default.nix
             ./hosts/okeanos1/default.nix
             ./modules/common/default.nix
           ];
         };
-        darky = unstablenixpkgs.lib.nixosSystem {
+        darky = mkHost {
+          channel = nixpkgs;
           modules = [
-            impermanence.nixosModules.impermanence
             disko.nixosModules.disko
             microvm.nixosModules.host
-            ./default.nix
             ./modules/bgp/default.nix
             ./modules/common/default.nix
             ./modules/persistence/default.nix
@@ -86,18 +93,10 @@
             ./hosts/darky/default.nix
           ];
         };
-        vm = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./default.nix
-            ./hosts/nixosrnd/default.nix
-          ];
-        };
-        sobeck = unstablenixpkgs.lib.nixosSystem {
+        sobeck = mkHost {
           modules = [
             disko.nixosModules.disko
-            impermanence.nixosModules.impermanence
             microvm.nixosModules.host
-            ./default.nix
             ./hosts/sobeck/default.nix
             ./modules/bgp/default.nix
             ./modules/common/default.nix
@@ -108,45 +107,21 @@
             { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
         };
-        orinoco = unstablenixpkgs.lib.nixosSystem {
+        orinoco = mkHost {
           modules = [
-            impermanence.nixosModules.impermanence
-            ./default.nix
-            ./hosts/orinoco/default.nix
-            ./modules/common/default.nix
-            ./modules/desktop/default.nix
-            ./modules/persistence/default.nix
-            ./modules/physical/default.nix
-            ./modules/emacs/default.nix
-            ./modules/firefox/default.nix
-            ./modules/unbound/default.nix
+            ./hosts/orinoco
+            ./modules/workstation
           ];
         };
-        niato = unstablenixpkgs.lib.nixosSystem {
+        niato = mkHost {
           modules = [
-            impermanence.nixosModules.impermanence
-            microvm.nixosModules.host
-            ./default.nix
-            ./hosts/niato/default.nix
-            ./modules/common/default.nix
-            ./modules/desktop/default.nix
-            ./modules/persistence/default.nix
-            ./modules/physical/default.nix
-            ./modules/emacs/default.nix
-            ./modules/firefox/default.nix
-            ./modules/unbound/default.nix
+            ./hosts/niato
+            ./modules/workstation
           ];
         };
-        nixosrnd = unstablenixpkgs.lib.nixosSystem {
-          modules = [
-            ./default.nix
-            ./hosts/nixosrnd/default.nix
-          ];
-        };
-        livecd = nixpkgs.lib.nixosSystem {
+        livecd = mkHost {
           modules = [
             "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            ./default.nix
             ./modules/desktop/default.nix
             ./modules/emacs/default.nix
             ./modules/firefox/default.nix
@@ -154,10 +129,9 @@
             { nixpkgs.hostPlatform = "x86_64-linux"; }
           ];
         };
-        rpi4rf = nixpkgs.lib.nixosSystem {
+        rpi4rf = mkHost {
           modules = [
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
-            ./default.nix
             ./hosts/rpi4rf/default.nix
             ./modules/sdr/default.nix
             {
@@ -166,25 +140,21 @@
             }
           ];
         };
-        nixosvpn = unstablenixpkgs.lib.nixosSystem {
+        nixosvpn = mkHost {
           modules = [
-            ./default.nix
             ./hosts/nixosvpn/default.nix
           ];
         };
-        connector = nixpkgs.lib.nixosSystem {
+        connector = mkHost {
           modules = [
-            ./default.nix
             ./hosts/connector/default.nix
             ./modules/unbound/default.nix
           ];
         };
-        warden = nixpkgs.lib.nixosSystem {
+        warden = mkHost {
           modules = [
-            ./default.nix
             ./modules/persistence/default.nix
             ./hosts/warden/default.nix
-            impermanence.nixosModules.impermanence
             agenix.nixosModules.default
           ];
         };
