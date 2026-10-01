@@ -2,8 +2,8 @@
   description = "Erethon's (dgrig) NixOS setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    unstablenixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "https://channels.nixos.org/nixos-26.05/nixexprs.tar.zst";
+    unstablenixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
     #mynixpkgs.url = "path:/home/dgrig/Code/Nix/nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
     microvm = {
@@ -18,8 +18,6 @@
       url = "github:ryantm/agenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "";
-        home-manager.follows = "";
       };
     };
   };
@@ -130,7 +128,6 @@
             microvm.nixosModules.host
             ./default.nix
             ./hosts/niato/default.nix
-            ./modules/bgp/default.nix
             ./modules/common/default.nix
             ./modules/desktop/default.nix
             ./modules/persistence/default.nix
