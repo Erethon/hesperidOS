@@ -20,11 +20,6 @@ in
   ];
   erethon = {
     network.mainIP = siteIP;
-    bgp = {
-      siteIP = "5";
-      siteSubnet = siteSubnet;
-      routerID = "192.168.42.42";
-    };
   };
   unbound.tsDomain = "ts.erethon";
   unbound.homeDomain = "home.erethon";
@@ -52,9 +47,6 @@ in
 
   networking = {
     hostName = hostname;
-    wireguard.interfaces.wg0 = {
-      ips = [ "${siteIP}/64" ];
-    };
   };
   environment.systemPackages = with pkgs; [
     acpi
