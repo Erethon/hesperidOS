@@ -10,7 +10,7 @@
           options = {
             ttl = lib.mkOption {
               type = lib.types.int;
-              default = 300;
+              default = 60;
             };
             values = lib.mkOption {
               type = lib.types.listOf lib.types.str;

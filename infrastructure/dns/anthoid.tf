@@ -60,7 +60,7 @@ resource "powerdns_record" "grafana" {
   zone    = powerdns_zone.anthoideu.name
   name    = "${each.key}.anthoid.eu."
   type    = "CNAME"
-  ttl     = 300
+  ttl     = 60
   records = ["${each.value}.anthoid.eu."]
 }
 
@@ -70,7 +70,7 @@ resource "powerdns_record" "a" {
   zone    = powerdns_zone.anthoideu.name
   name    = "${each.key}.anthoid.eu."
   type    = "A"
-  ttl     = 300
+  ttl     = 60
   records = [each.value]
 }
 
@@ -80,7 +80,7 @@ resource "powerdns_record" "hosts" {
   zone    = powerdns_zone.anthoideu.name
   name    = "${each.key}.hosts.${local.aszone}"
   type    = "AAAA"
-  ttl     = 300
+  ttl     = 60
   records = [each.value]
 }
 
