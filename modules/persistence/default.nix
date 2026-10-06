@@ -1,5 +1,8 @@
+{ inputs, ... }:
 {
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
   environment.persistence."/persistent" = {
+    directories =  [ "/var/lib/nixos" ];
     users.dgrig = {
       directories = [
         "Code"
