@@ -7,6 +7,7 @@
   programs.firefox = {
     nativeMessagingHosts.packages = [
       pkgs.tridactyl-native
+      pkgs.keepassxc
     ];
     enable = true;
     policies = {
@@ -43,6 +44,11 @@
           install_url = "https://addons.mozilla.org/firefox/downloads/file/4702886/karakeep-1.2.9.xpi";
           installation_mode = "force_installed";
         };
+"keepassxc-browser@keepassxc.org" = {
+        install_url = "https://addons.mozilla.org/firefox/downloads/file/4831838/keepassxc_browser-1.10.3.xpi";
+        installation_mode = "force_installed";
+      };
+
       };
       Preferences = {
         "geo.enabled" = {
