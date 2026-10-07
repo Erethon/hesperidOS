@@ -29,6 +29,22 @@ in
     hostId = "df1f1f1f";
   };
 
+  erethon.bgp = {
+    siteIP = "3";
+    siteSubnet = "1000";
+    routerID = "192.168.1.55";
+  };
+
   time.timeZone = "Europe/Athens";
   erethon.network.mainIP = "2a06:9801:74d::3";
+
+  users.users.git = {
+    isSystemUser = true;
+    group = "git";
+    home = "/srv/git";
+    createHome = true;
+    shell = "${pkgs.git}/bin/git-shell";
+    openssh.authorizedKeys.keys = config.users.users.dgrig.openssh.authorizedKeys.keys;
+  };
+  users.groups.git = { };
 }

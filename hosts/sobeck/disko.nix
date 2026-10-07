@@ -53,6 +53,12 @@
             options.mountpoint = "/nix";
             mountpoint = "/nix";
           };
+          "git" = {
+            type = "zfs_fs";
+            options.mountpoint = "/srv/git";
+            mountpoint = "/srv/git";
+          };
+
         };
       };
     };
