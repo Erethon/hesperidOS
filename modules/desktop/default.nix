@@ -52,7 +52,6 @@ in
     gh
     ghostty
     gimp
-    git-annex
     hydra-check
     isync
     jq
