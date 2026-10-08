@@ -8,4 +8,6 @@
     ../firefox
     ../unbound
   ];
+
+  zramSwap.enable = true;
 }
