@@ -44,22 +44,31 @@ dns-apply: dns-records
     export PDNS_API_KEY="$(< ~/Vault/pdns)"
     tofu -chdir={{dns_dir}} apply
 
-deploy host target="":
+deploy host target="": (_rebuild "switch" host target)
+test host target="": (_rebuild "test" host target)
+
+[private]
+_rebuild action host target="":
     #!/usr/bin/env bash
     set -euo pipefail
 
     case "{{host}}" in
       niato)  default_target="" ;;
+      orinoco)  default_target="" ;;
       darky)  default_target="95.217.227.105" ;;
+      sobeck)  default_target="192.168.1.55" ;;
+      frank)  default_target="192.168.1.99" ;;
     esac
 
     target={{quote(target)}}
     target="${target:-$default_target}"
 
-    args=(switch --flake ".#{{host}}" --sudo)
+    args=({{action}} --use-substitutes --flake ".#{{host}}" --sudo)
     if [[ -n "$target" ]]; then
       args+=(--target-host "$target" --use-remote-sudo)
     fi
 
     NIX_SSHOPTS="-l dgrig -p 222" nixos-rebuild "${args[@]}"
-    just dns-apply
+    if [[ "{{action}}" == "switch" ]]; then
+      just dns-apply
+    fi
