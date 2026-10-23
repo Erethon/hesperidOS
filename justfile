@@ -63,6 +63,11 @@ _rebuild action host target="":
     target={{quote(target)}}
     target="${target:-$default_target}"
 
+    if [[ -z "$target" && "$(hostname)" != "{{host}}" ]]; then
+      echo "Local hostname doesn't match target '{{host}}'" >&2
+      exit 1
+    fi
+
     args=({{action}} --use-substitutes --flake ".#{{host}}" --sudo)
     if [[ -n "$target" ]]; then
       args+=(--target-host "$target" --use-remote-sudo)
