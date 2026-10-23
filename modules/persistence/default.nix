@@ -17,7 +17,6 @@
         ".config/gh"
         ".config/ghostty"
         ".config/mozilla"
-        ".config/opencode"
         ".config/tridactyl"
         ".ssh"
         ".mbsync"
@@ -27,7 +26,6 @@
         ".emacs.d"
         ".ollama"
         ".local/share/eva"
-        ".local/share/opencode"
         ".newsboat"
       ];
       files = [
