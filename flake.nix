@@ -93,6 +93,16 @@
             ./hosts/darky/default.nix
           ];
         };
+        frank = mkHost {
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/frank/default.nix
+            ./modules/common/default.nix
+            ./modules/persistence/default.nix
+            ./modules/physical/default.nix
+            ./modules/initrdssh/default.nix
+          ];
+        };
         sobeck = mkHost {
           modules = [
             disko.nixosModules.disko
