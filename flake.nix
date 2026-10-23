@@ -7,16 +7,16 @@
     impermanence.url = "github:nix-community/impermanence";
     microvm = {
       url = "github:microvm-nix/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstablenixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstablenixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "unstablenixpkgs";
       };
     };
   };
