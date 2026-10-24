@@ -16,7 +16,6 @@ let
       webserver-address=127.0.0.1
       webserver-port=8081
       api-key=''${PDNS_API_KEY}
-      gpgsql-dnssec=yes
       default-ksk-algorithm=ed25519
     '';
     secondary = ''
@@ -55,6 +54,7 @@ in
           launch=gpgsql
           gpgsql-user=pdns
           gpgsql-dbname=pdns
+          gpgsql-dnssec=yes
         ''
         + roleConfig.${cfg.role};
       };
