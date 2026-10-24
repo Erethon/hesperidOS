@@ -58,6 +58,7 @@ _rebuild action host target="":
       darky)  default_target="95.217.227.105" ;;
       sobeck)  default_target="192.168.1.55" ;;
       frank)  default_target="192.168.1.99" ;;
+      ns3)  default_target="83.212.75.10" ;;
     esac
 
     target={{quote(target)}}

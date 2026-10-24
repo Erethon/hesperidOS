@@ -3,7 +3,7 @@
     "agenix": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "unstablenixpkgs"
         ]
       },
       "locked": {
@@ -23,7 +23,7 @@
     "disko": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "unstablenixpkgs"
         ]
       },
       "locked": {
@@ -83,7 +83,7 @@
     "microvm": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "unstablenixpkgs"
         ],
         "spectrum": "spectrum"
       },

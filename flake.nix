@@ -73,6 +73,15 @@
         ];
 
       nixosConfigurations = {
+        ns3 = mkHost {
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/ns3/default.nix
+            ./modules/common/default.nix
+            ./modules/powerdns/default.nix
+            { erethon.powerdns.role = "secondary"; }
+          ];
+        };
         okeanos1 = mkHost {
           modules = [
             disko.nixosModules.disko
