@@ -11,6 +11,13 @@ let
       primary=yes
       allow-axfr-ips=127.0.0.1/8,::1,83.212.75.10/32
       also-notify=83.212.75.10
+      api=yes
+      webserver=yes
+      webserver-address=127.0.0.1
+      webserver-port=8081
+      api-key=''${PDNS_API_KEY}
+      gpgsql-dnssec=yes
+      default-ksk-algorithm=ed25519
     '';
     secondary = ''
       secondary=yes
@@ -43,20 +50,14 @@ in
       };
       powerdns = {
         enable = true;
-        secretFile = "/etc/powerdns/secrets";
+        secretFile = lib.mkIf (cfg.role == "primary") "/etc/powerdns/secrets";
         extraConfig = ''
           launch=gpgsql
           gpgsql-user=pdns
           gpgsql-dbname=pdns
-          api=yes
-          webserver=yes
-          webserver-address=127.0.0.1
-          webserver-port=8081
-          api-key=''${PDNS_API_KEY}
         ''
         + roleConfig.${cfg.role};
       };
-
     };
     networking.firewall = {
       allowedTCPPorts = [ 53 ];

@@ -98,6 +98,7 @@
             ./modules/common/default.nix
             ./modules/persistence/default.nix
             ./modules/physical/default.nix
+            ./modules/powerdns/default.nix
             ./modules/initrdssh/default.nix
             ./hosts/darky/default.nix
           ];
