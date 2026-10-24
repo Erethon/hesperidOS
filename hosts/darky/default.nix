@@ -47,6 +47,10 @@ in
         "grafana.anthoid.eu".extraConfig = ''
           reverse_proxy localhost:3000
         '';
+        "ip.anthoid.eu" = {
+          serverAliases = [ "ip4.anthoid.eu" "ip6.anthoid.eu" ];
+          extraConfig = ''respond "{remote_host}"'';
+        };
       };
     };
     grafana = {
