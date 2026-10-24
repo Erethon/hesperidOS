@@ -84,34 +84,9 @@ in
             }
           ];
         };
-
       };
       settings.security.secret_key = "$__file{/etc/grafana/secret.key}";
       settings.server.domain = "grafana.anthoid.eu";
-    };
-    postgresql = {
-      enable = true;
-      ensureUsers = [
-        {
-          name = "pdns";
-          ensureDBOwnership = true;
-        }
-      ];
-      ensureDatabases = [ "pdns" ];
-    };
-    powerdns = {
-      enable = true;
-      secretFile = "/etc/powerdns/secrets";
-      extraConfig = ''
-        launch=gpgsql
-        gpgsql-user=pdns
-        gpgsql-dbname=pdns
-        api=yes
-        webserver=yes
-        webserver-address=127.0.0.1
-        webserver-port=8081
-        api-key=''${PDNS_API_KEY}
-      '';
     };
     prometheus = {
       enable = true;
