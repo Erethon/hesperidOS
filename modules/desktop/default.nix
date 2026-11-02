@@ -46,6 +46,7 @@ in
     difftastic
     dmenu
     dunst
+    eva
     exiftool
     feh
     files-to-prompt

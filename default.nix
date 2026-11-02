@@ -13,7 +13,6 @@
     dool
     dust
     dysk
-    eva
     fd
     file
     fzf
