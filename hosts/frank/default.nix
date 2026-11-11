@@ -30,4 +30,5 @@ in
   };
 
   time.timeZone = "Europe/Athens";
+  system.stateVersion = "26.11";
 }

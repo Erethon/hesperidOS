@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   networking = {
     firewall = {
@@ -16,6 +16,20 @@
     defaultGateway = {
       address = "192.168.1.1";
       interface = "enp34s0";
+    };
+  };
+
+  services.autosuspend = {
+    enable = true;
+    settings = {
+      interval = 30;
+      idle_time = 300;
+    };
+    checks = {
+      ssh = {
+        class = "ActiveConnection";
+        ports = lib.concatMapStringsSep "," toString config.services.openssh.ports;
+      };
     };
   };
 }
