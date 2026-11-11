@@ -40,6 +40,21 @@ in
   };
 
   time.timeZone = "Europe/Athens";
+# systemd.user.services.mailsync = {
+#   description = "Sync mail";
+#     path = with pkgs; [ isync notmuch age ];
+#  serviceConfig = {
+#    Type = "oneshot";
+#    ExecStart = [ "${pkgs.isync}/bin/mbsync -a -q" "${pkgs.notmuch}/bin/notmuch new" ];
+#  };
+#};
+
+#systemd.user.timers.mailsync = {
+#  timerConfig = {
+#    OnActiveSec = "0";
+#    OnUnitActiveSec = "5min";
+#  };
+#};
 
   _module.args.hostConfig = hostConfig;
   system.stateVersion = "26.05";

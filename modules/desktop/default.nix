@@ -41,7 +41,10 @@ in
   fonts.packages = [ custom_terminus ];
 
   environment.systemPackages = with pkgs; [
-    (llm.withPlugins { llm-openai-plugin = true; })
+    (llm.withPlugins {
+      llm-openai-plugin = true;
+      llm-anthropic = true;
+    })
     age
     borgbackup
     difftastic
@@ -76,6 +79,7 @@ in
     slock
     tmuxPlugins.fzf-tmux-url
     ungoogled-chromium
+    wakeonlan
     whois
     xclip
     xdotool
