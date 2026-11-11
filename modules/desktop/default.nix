@@ -9,6 +9,23 @@ let
       ];
     }
   );
+  wake-host = pkgs.writeShellApplication {
+    name = "wake-host";
+    runtimeInputs = with pkgs; [ coreutils netcat wakeonlan ];
+    text = ''
+      host=$1
+      port=$2
+      mac=$3
+
+      nc -z -w1 "$host" "$port" && exit 0
+      wakeonlan "$mac" >/dev/null
+      for _ in $(seq 60); do
+        nc -z -w1 "$host" "$port" && exit 0
+        sleep 1
+      done
+      exit 1
+    '';
+  };
 in
 {
   imports = [ ./persistence.nix ];
@@ -92,5 +109,8 @@ in
 
   documentation.enable = lib.mkForce true;
   security.sudo.wheelNeedsPassword = lib.mkForce true;
-  users.users.dgrig.extraGroups = [ "dialout" ];
+  users.users.dgrig = {
+    extraGroups = [ "dialout" ];
+    packages = [ wake-host ];
+  };
 }
