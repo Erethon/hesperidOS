@@ -22,6 +22,11 @@
       disableTaildrop = true;
       disableUpstreamLogging = true;
     };
+    victorialogs = {
+      enable = true;
+      listenAddress = "[::1]:9428";
+      extraOptions = [ "-enableTCP6" ];
+    };
   };
   networking = {
     wireguard.interfaces.wg0 = {

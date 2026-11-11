@@ -58,6 +58,11 @@
             options.mountpoint = "/srv/git";
             mountpoint = "/srv/git";
           };
+          "victorialog" = {
+            type = "zfs_fs";
+            options.mountpoint = "/var/lib/private/victorialogs";
+            mountpoint = "/var/lib/private/victorialogs";
+          };
 
         };
       };
