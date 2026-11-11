@@ -11,6 +11,7 @@ let
   );
 in
 {
+  imports = [ ./persistence.nix ];
   services = {
     opensnitch.enable = true;
     xserver = {
@@ -58,7 +59,6 @@ in
     jq
     keepassxc
     lm_sensors
-    mplayer
     mpv
     msmtp
     neomutt
