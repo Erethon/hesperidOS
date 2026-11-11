@@ -16,7 +16,7 @@ let
       webserver-address=127.0.0.1
       webserver-port=8081
       api-key=''${PDNS_API_KEY}
-      default-ksk-algorithm=ed25519
+      default-ksk-algorithm=ecdsa256
     '';
     secondary = ''
       secondary=yes
