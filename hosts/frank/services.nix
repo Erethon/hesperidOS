@@ -1,6 +1,12 @@
 { config, lib, ... }:
 {
+
+  boot.blacklistedKernelModules = [ "nouveau" ];
   networking = {
+    nameservers = [
+      "192.168.1.1"
+      "1.1.1.1"
+    ];
     firewall = {
       allowedUDPPorts = [ 9 ];
     };
