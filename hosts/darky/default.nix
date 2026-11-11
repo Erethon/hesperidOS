@@ -51,6 +51,9 @@ in
           serverAliases = [ "ip4.anthoid.eu" "ip6.anthoid.eu" ];
           extraConfig = ''respond "{remote_host}"'';
         };
+        "dgrig.com".extraConfig = ''
+          redir https://about.erethon.com
+        '';
       };
     };
     grafana = {
